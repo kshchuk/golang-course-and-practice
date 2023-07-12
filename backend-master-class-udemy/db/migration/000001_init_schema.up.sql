@@ -21,7 +21,7 @@ CREATE TABLE IF NOT EXISTS public.entry
     entry_id bigint NOT NULL DEFAULT nextval('entry_entry_id_seq'::regclass),
     account_id bigint NOT NULL,
     amount bigint,
-    created_at time with time zone NOT NULL DEFAULT now(),
+    created_at timestamp with time zone NOT NULL DEFAULT now(),
     CONSTRAINT entry_pkey PRIMARY KEY (entry_id)
 );
 
@@ -31,7 +31,7 @@ CREATE TABLE IF NOT EXISTS public.transfer
     from_account_id bigint NOT NULL,
     to_account_id bigint NOT NULL,
     amount bigint,
-    created_at time with time zone NOT NULL DEFAULT now(),
+    created_at timestamp with time zone NOT NULL DEFAULT now(),
     CONSTRAINT transfer_pkey PRIMARY KEY (transfer_id)
 );
 
