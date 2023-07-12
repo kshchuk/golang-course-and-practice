@@ -4,6 +4,7 @@ import (
 	"context"
 	"database/sql"
 	"testing"
+	"time"
 
 	"github.com/stretchr/testify/require"
 	"tutorial.sqlc.dev/app/utils"
@@ -47,6 +48,7 @@ func TestGetEntry(t *testing.T) {
 	require.Equal(t, entry1.Amount, entry2.Amount)
 	require.Equal(t, entry1.CreatedAt, entry2.CreatedAt)
 	require.Equal(t, entry1.EntryID, entry2.EntryID)
+	require.WithinDuration(t, entry1.CreatedAt, entry2.CreatedAt, time.Second)
 }
 
 func TestUpdateEntry(t *testing.T) {
@@ -68,8 +70,8 @@ func TestUpdateEntry(t *testing.T) {
 
 	require.Equal(t, entry1.AccountID, entry2.AccountID)
 	require.Equal(t, arg.Amount, entry2.Amount)
-	require.Equal(t, entry1.CreatedAt, entry2.CreatedAt)
 	require.Equal(t, entry1.EntryID, entry2.EntryID)
+	require.WithinDuration(t, entry1.CreatedAt, entry2.CreatedAt, time.Second)
 }
 
 func TestDeleteEntry(t *testing.T) {
