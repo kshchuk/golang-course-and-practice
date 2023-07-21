@@ -37,6 +37,8 @@ func TestTransferTx(t *testing.T) {
 	}
 
 	// check results
+	existed := make(map[int]bool)
+
 	for i := 0; i < n; i++ {
 		err := <-errs
 		result := <-results
@@ -81,27 +83,41 @@ func TestTransferTx(t *testing.T) {
 		_, err = store.GetEntry(context.Background(), toEntry.EntryID)
 		require.NoError(t, err)
 
-		// check accounts' balance
+		// check accounts
 		fromAccount := result.FromAccount
 		require.NotEmpty(t, fromAccount)
 		require.Equal(t, account1.AccountID, fromAccount.AccountID)
-		require.Equal(t, account1.Balance-amount.Int64, fromAccount.Balance)
 		require.Equal(t, account1.Currency, fromAccount.Currency)
 		require.Equal(t, account1.Owner, fromAccount.Owner)
 		require.NotZero(t, fromAccount.CreatedAt)
 
-		_, err = store.GetAccount(context.Background(), fromAccount.AccountID)
-		require.NoError(t, err)
-
 		toAccount := result.ToAccount
 		require.NotEmpty(t, toAccount)
 		require.Equal(t, account2.AccountID, toAccount.AccountID)
-		require.Equal(t, account2.Balance+amount.Int64, toAccount.Balance)
 		require.Equal(t, account2.Currency, toAccount.Currency)
 		require.Equal(t, account2.Owner, toAccount.Owner)
 		require.NotZero(t, toAccount.CreatedAt)
 
-		_, err = store.GetAccount(context.Background(), toAccount.AccountID)
-		require.NoError(t, err)
+		// check account's balance
+		diff1 := account1.Balance - fromAccount.Balance
+		diff2 := toAccount.Balance - account2.Balance
+		require.Equal(t, diff1, diff2)
+		require.True(t, diff1 > 0)
+		require.True(t, diff1%amount.Int64 == 0)
+
+		k := int(diff1 / amount.Int64)
+		require.True(t, k >= 1 && k <= n)
+		require.NotContains(t, existed, k)
+		existed[k] = true
 	}
+
+	// check the final updated balance
+	updateAccount1, err := testQueries.GetAccount(context.Background(), account1.AccountID)
+	require.NoError(t, err)
+
+	updateAccount2, err := testQueries.GetAccount(context.Background(), account2.AccountID)
+	require.NoError(t, err)
+
+	require.Equal(t, account1.Balance-int64(n)*amount.Int64, updateAccount1.Balance)
+	require.Equal(t, account2.Balance+int64(n)*amount.Int64, updateAccount2.Balance)
 }
