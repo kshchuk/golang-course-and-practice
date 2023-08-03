@@ -47,6 +47,7 @@ jobs:
         ls
         sudo mv migrate /usr/local/bin/
         migrate -version
+        cd backend-master-class-udemy
 
     - name: Run migrations
       run: make migrateup
