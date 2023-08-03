@@ -52,7 +52,9 @@ jobs:
         migrate -version
 
     - name: Run migrations
-      run: make migrateup
+      run: |
+        ls
+        make migrateup
 
     - name: Test
       run: make test
