@@ -55,4 +55,5 @@ jobs:
 
     - name: Test
       run: |
+        cd backend-master-class-udemy/
         go test -v -cover ./...
