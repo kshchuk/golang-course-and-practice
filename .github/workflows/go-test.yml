@@ -47,6 +47,7 @@ jobs:
         ls
         sudo mv migrate /usr/local/bin/migrate
         which migrate
+        cd backend-master-class-udemy/
         ls
         migrate -version
 
