@@ -5,7 +5,7 @@ name: Buid-Test
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "test" ]
   pull_request:
     branches: [ "main" ]
 
@@ -52,7 +52,9 @@ jobs:
         migrate -version
 
     - name: Run migrations
-      run: migrate -path db/migration -database "postgresql://root:secret@localhost:5431/simple_bank?sslmode=disable" -verbose up
+      run: |
+        ls
+        migrate -path db/migration -database "postgresql://root:secret@localhost:5431/simple_bank?sslmode=disable" -verbose up
 
 
     - name: Test
