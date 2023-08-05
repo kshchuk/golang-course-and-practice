@@ -44,17 +44,16 @@ jobs:
       run: |
         curl -L https://github.com/golang-migrate/migrate/releases/download/v4.16.2/migrate.linux-amd64.tar.gz -o migrate.linux-amd64.tar.gz
         tar xvz < migrate.linux-amd64.tar.gz
-        ls
         sudo mv migrate /usr/local/bin/migrate
         which migrate
-        cd backend-master-class-udemy
-        ls
         migrate -version
 
     - name: Run migrations
       run: |
-        ls
-        make migrateup
+        cd backend-master-class-udemy/
+        migrate -path db/migration -database "postgresql://root:secret@localhost:5431/simple_bank?sslmode=disable" -verbose up
 
     - name: Test
-      run: make test
+      run: |
+        cd backend-master-class-udemy/
+        go test -v -cover ./...
