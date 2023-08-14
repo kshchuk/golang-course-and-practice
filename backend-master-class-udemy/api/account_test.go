@@ -144,7 +144,7 @@ func TestCreateAccountAPI(t *testing.T) {
 
 				store.EXPECT().
 					CreateAccount(gomock.Any(), gomock.Eq(arg)).
-					Times(1).
+					Times(0).
 					Return(account, nil)
 			},
 			checkResponse: func(t *testing.T, recorder *httptest.ResponseRecorder) {
