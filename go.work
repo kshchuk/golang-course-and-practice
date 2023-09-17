@@ -1,4 +1,6 @@
 go 1.20
 
-use ./coursera/Getting_Started_with_Go/1
-
+use (
+	./coursera/Concurrency_in_Go/4
+	./coursera/Getting_Started_with_Go/1
+)
