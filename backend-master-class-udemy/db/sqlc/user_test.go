@@ -12,11 +12,13 @@ import (
 )
 
 func createRandomUser(t *testing.T) User {
+	hashedPassword, err := utils.HashPassword(utils.RandomPassword())
+
 	arg := CreateUserParams{
 		Username:       utils.RandomOwner(),
 		FullName:       utils.RandomString(10),
 		Email:          utils.RandomEmail(),
-		HashedPassword: utils.RandomPassword(),
+		HashedPassword: hashedPassword,
 	}
 
 	user, err := testQueries.CreateUser(context.Background(), arg)
