@@ -50,6 +50,9 @@ func EqCreateUserParams(arg db.CreateUserParams, password string) gomock.Matcher
 func TestCreateUserAPI(t *testing.T) {
 	user, password := randomUser(t)
 
+	hashedPassword, err := utils.HashPassword(password)
+	require.NoError(t, err)
+
 	testCases := []struct {
 		name          string
 		body          gin.H
@@ -60,7 +63,7 @@ func TestCreateUserAPI(t *testing.T) {
 			name: "OK",
 			body: gin.H{
 				"username":  user.Username,
-				"password":  password,
+				"password":  hashedPassword,
 				"full_name": user.FullName,
 				"email":     user.Email,
 			},
@@ -71,7 +74,7 @@ func TestCreateUserAPI(t *testing.T) {
 					Email:    user.Email,
 				}
 				store.EXPECT().
-					CreateUser(gomock.Any(), EqCreateUserParams(arg, password)).
+					CreateUser(gomock.Any(), EqCreateUserParams(arg, hashedPassword)).
 					Times(1).
 					Return(user, nil)
 			},
@@ -84,7 +87,7 @@ func TestCreateUserAPI(t *testing.T) {
 			name: "InternalError",
 			body: gin.H{
 				"username":  user.Username,
-				"password":  password,
+				"password":  hashedPassword,
 				"full_name": user.FullName,
 				"email":     user.Email,
 			},
@@ -102,7 +105,7 @@ func TestCreateUserAPI(t *testing.T) {
 			name: "InvalidUsername",
 			body: gin.H{
 				"username":  "invalid-user#1",
-				"password":  password,
+				"password":  hashedPassword,
 				"full_name": user.FullName,
 				"email":     user.Email,
 			},
@@ -119,7 +122,7 @@ func TestCreateUserAPI(t *testing.T) {
 			name: "InvalidEmail",
 			body: gin.H{
 				"username":  user.Username,
-				"password":  password,
+				"password":  hashedPassword,
 				"full_name": user.FullName,
 				"email":     "invalid-email",
 			},
