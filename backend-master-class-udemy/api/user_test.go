@@ -31,7 +31,7 @@ func (e eqCreateUserParamsMatcher) Matches(x interface{}) bool {
 	}
 
 	err := utils.CheckPasswordHash(e.password, arg.HashedPassword)
-	if err != true {
+	if err != nil {
 		return false
 	}
 
@@ -164,7 +164,7 @@ func TestCreateUserAPI(t *testing.T) {
 			store := mockdb.NewMockStore(ctrl)
 			tc.buildStubs(store)
 
-			server := NewServer(store)
+			server := newTestServer(t, store)
 			recorder := httptest.NewRecorder()
 
 			// Marshal body data to JSON

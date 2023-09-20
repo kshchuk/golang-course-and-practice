@@ -8,11 +8,11 @@ func TestPassword(t *testing.T) {
 	if err != nil {
 		t.Error("Error hashing password")
 	}
-	if !CheckPasswordHash(password, hash) {
+	if err = CheckPasswordHash(password, hash); err != nil {
 		t.Error("Error checking password hash")
 	}
 
-	if CheckPasswordHash("wrongpassword", hash) {
+	if err = CheckPasswordHash("wrongpassword", hash); err == nil {
 		t.Error("Error checking password hash")
 	}
 }
