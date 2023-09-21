@@ -19,8 +19,10 @@ FOR NO KEY UPDATE;
 
 -- name: ListAсcounts :many
 SELECT * FROM public.account
-LIMIT $1
-OFFSET $2;
+WHERE owner = $1
+ORDER BY account_id
+LIMIT $2
+OFFSET $3;
 
 -- name: UpdateAccount :one
 UPDATE public.account
