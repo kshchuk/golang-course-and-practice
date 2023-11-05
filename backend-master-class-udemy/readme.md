@@ -1,6 +1,6 @@
 # Masterclass Backend Web Service Implementation
 
-This repository contains the implementation of the backend web service I've built during the course.
+This repository contains the implementation of the backend web service I'm building during the course.
 
 ## Course Recap
 
