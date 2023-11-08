@@ -1,0 +1,624 @@
+
+C:\Users\lenovo>docker pull ubuntu:latest
+latest: Pulling from library/ubuntu
+Digest: sha256:2b7412e6465c3c7fc5bb21d3e6f1917c167358449fecac8176c6e496e5c1f05f
+Status: Image is up to date for ubuntu:latest
+docker.io/library/ubuntu:latest
+
+What's Next?
+  View a summary of image vulnerabilities and recommendations →docker scout quickview ubuntu:latest
+
+C:\Users\lenovo>docker run -it ubuntu:latest bash
+root@a28770578510:/# apt update
+Get:1 http://archive.ubuntu.com/ubuntu jammy InRelease [270 kB]
+Get:2 http://security.ubuntu.com/ubuntu jammy-security InRelease [110 kB]
+Get:3 http://archive.ubuntu.com/ubuntu jammy-updates InRelease [119 kB]
+Get:4 http://security.ubuntu.com/ubuntu jammy-security/main amd64 Packages [1192 kB]
+Get:5 http://archive.ubuntu.com/ubuntu jammy-backports InRelease [109 kB]
+Get:6 http://archive.ubuntu.com/ubuntu jammy/universe amd64 Packages [17.5 MB]
+Get:7 http://security.ubuntu.com/ubuntu jammy-security/multiverse amd64 Packages [44.0 kB]
+Get:8 http://security.ubuntu.com/ubuntu jammy-security/universeamd64 Packages [1008 kB]
+Get:9 http://security.ubuntu.com/ubuntu jammy-security/restricted amd64 Packages [1392 kB]
+Get:10 http://archive.ubuntu.com/ubuntu jammy/multiverse amd64 Packages [266 kB]
+Get:11 http://archive.ubuntu.com/ubuntu jammy/restricted amd64 Packages [164 kB]
+Get:12 http://archive.ubuntu.com/ubuntu jammy/main amd64 Packages [1792 kB]
+Get:13 http://archive.ubuntu.com/ubuntu jammy-updates/restricted amd64 Packages [1419 kB]
+Get:14 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 Packages [1461 kB]
+Get:15 http://archive.ubuntu.com/ubuntu jammy-updates/universe amd64 Packages [1274 kB]
+Get:16 http://archive.ubuntu.com/ubuntu jammy-updates/multiverse amd64 Packages [49.8 kB]
+Get:17 http://archive.ubuntu.com/ubuntu jammy-backports/main amd64 Packages [78.3 kB]
+Get:18 http://archive.ubuntu.com/ubuntu jammy-backports/universe amd64 Packages [32.6 kB]
+Fetched 28.3 MB in 5s (5210 kB/s)
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+7 packages can be upgraded. Run 'apt list --upgradable' to see them.
+root@a28770578510:/# apt get-install nano
+E: Invalid operation get-install
+root@a28770578510:/# apt install nano
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+Suggested packages:
+  hunspell
+The following NEW packages will be installed:
+  nano
+0 upgraded, 1 newly installed, 0 to remove and 7 not upgraded.
+Need to get 280 kB of archives.
+After this operation, 881 kB of additional disk space will be used.
+Get:1 http://archive.ubuntu.com/ubuntu jammy/main amd64 nano amd64 6.2-1 [280 kB]
+Fetched 280 kB in 1s (319 kB/s)
+debconf: delaying package configuration, since apt-utils is notinstalled
+Selecting previously unselected package nano.
+(Reading database ... 4395 files and directories currently installed.)
+Preparing to unpack .../archives/nano_6.2-1_amd64.deb ...
+Unpacking nano (6.2-1) ...
+Setting up nano (6.2-1) ...
+update-alternatives: using /bin/nano to provide /usr/bin/editor(editor) in auto mode
+update-alternatives: warning: skip creation of /usr/share/man/man1/editor.1.gz because associated file /usr/share/man/man1/nano.1.gz (of link group editor) doesn't exist
+update-alternatives: using /bin/nano to provide /usr/bin/pico (pico) in auto mode
+update-alternatives: warning: skip creation of /usr/share/man/man1/pico.1.gz because associated file /usr/share/man/man1/nano.1.gz (of link group pico) doesn't exist
+root@a28770578510:/# nano
+root@a28770578510:/# apt install htop
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+The following additional packages will be installed:
+  libnl-3-200 libnl-genl-3-200
+Suggested packages:
+  lm-sensors lsof strace
+The following NEW packages will be installed:
+  htop libnl-3-200 libnl-genl-3-200
+0 upgraded, 3 newly installed, 0 to remove and 7 not upgraded.
+Need to get 200 kB of archives.
+After this operation, 589 kB of additional disk space will be used.
+Do you want to continue? [Y/n] y
+Get:1 http://archive.ubuntu.com/ubuntu jammy/main amd64 libnl-3-200 amd64 3.5.0-0.1 [59.1 kB]
+Get:2 http://archive.ubuntu.com/ubuntu jammy/main amd64 libnl-genl-3-200 amd64 3.5.0-0.1 [12.4 kB]
+Get:3 http://archive.ubuntu.com/ubuntu jammy/main amd64 htop amd64 3.0.5-7build2 [128 kB]
+Fetched 200 kB in 1s (265 kB/s)
+debconf: delaying package configuration, since apt-utils is notinstalled
+Selecting previously unselected package libnl-3-200:amd64.
+(Reading database ... 4468 files and directories currently installed.)
+Preparing to unpack .../libnl-3-200_3.5.0-0.1_amd64.deb ...
+Unpacking libnl-3-200:amd64 (3.5.0-0.1) ...
+Selecting previously unselected package libnl-genl-3-200:amd64.
+Preparing to unpack .../libnl-genl-3-200_3.5.0-0.1_amd64.deb ...Unpacking libnl-genl-3-200:amd64 (3.5.0-0.1) ...
+Selecting previously unselected package htop.
+Preparing to unpack .../htop_3.0.5-7build2_amd64.deb ...
+Unpacking htop (3.0.5-7build2) ...
+Setting up libnl-3-200:amd64 (3.5.0-0.1) ...
+Setting up libnl-genl-3-200:amd64 (3.5.0-0.1) ...
+Setting up htop (3.0.5-7build2) ...
+Processing triggers for libc-bin (2.35-0ubuntu3.4) ...
+root@a28770578510:/# htop
+
+
+
+
+
+
+
+root@a28770578510:/# exit
+exit
+
+C:\Users\lenovo>docker containers -a
+unknown shorthand flag: 'a' in -a
+See 'docker --help'.
+
+Usage:  docker [OPTIONS] COMMAND
+
+A self-sufficient runtime for containers
+
+Common Commands:
+  run         Create and run a new container from an image
+  exec        Execute a command in a running container
+  ps          List containers
+  build       Build an image from a Dockerfile
+  pull        Download an image from a registry
+  push        Upload an image to a registry
+  images      List images
+  login       Log in to a registry
+  logout      Log out from a registry
+  search      Search Docker Hub for images
+  version     Show the Docker version information
+  info        Display system-wide information
+
+Management Commands:
+  builder     Manage builds
+  buildx*     Docker Buildx (Docker Inc., v0.11.2-desktop.5)
+  compose*    Docker Compose (Docker Inc., v2.23.0-desktop.1)
+  container   Manage containers
+  context     Manage contexts
+  dev*        Docker Dev Environments (Docker Inc., v0.1.0)
+  extension*  Manages Docker extensions (Docker Inc., v0.2.20)
+  image       Manage images
+  init*       Creates Docker-related starter files for your project (Docker Inc., v0.1.0-beta.9)
+  manifest    Manage Docker image manifests and manifest lists
+  network     Manage networks
+  plugin      Manage plugins
+  sbom*       View the packaged-based Software Bill Of Materials (SBOM) for an image (Anchore Inc., 0.6.0)
+  scan*       Docker Scan (Docker Inc., v0.26.0)
+  scout*      Docker Scout (Docker Inc., v1.0.9)
+  system      Manage Docker
+  trust       Manage trust on Docker images
+  volume      Manage volumes
+
+Swarm Commands:
+  swarm       Manage Swarm
+
+Commands:
+  attach      Attach local standard input, output, and error streams to a running container
+  commit      Create a new image from a container's changes
+  cp          Copy files/folders between a container and the local filesystem
+  create      Create a new container
+  diff        Inspect changes to files or directories on a container's filesystem
+  events      Get real time events from the server
+  export      Export a container's filesystem as a tar archive
+  history     Show the history of an image
+  import      Import the contents from a tarball to create a filesystem image
+  inspect     Return low-level information on Docker objects
+  kill        Kill one or more running containers
+  load        Load an image from a tar archive or STDIN
+  logs        Fetch the logs of a container
+  pause       Pause all processes within one or more containers
+  port        List port mappings or a specific mapping for the container
+  rename      Rename a container
+  restart     Restart one or more containers
+  rm          Remove one or more containers
+  rmi         Remove one or more images
+  save        Save one or more images to a tar archive (streamed to STDOUT by default)
+  start       Start one or more stopped containers
+  stats       Display a live stream of container(s) resource usage statistics
+  stop        Stop one or more running containers
+  tag         Create a tag TARGET_IMAGE that refers to SOURCE_IMAGE
+  top         Display the running processes of a container
+  unpause     Unpause all processes within one or more containers
+  update      Update configuration of one or more containers
+  wait        Block until one or more containers stop, then print their exit codes
+
+Global Options:
+      --config string      Location of client config files (default
+                           "C:\\Users\\lenovo\\.docker")
+  -c, --context string     Name of the context to use to connect to the
+                           daemon (overrides DOCKER_HOST env var and
+                           default context set with "docker context use")
+  -D, --debug              Enable debug mode
+  -H, --host list          Daemon socket to connect to
+  -l, --log-level string   Set the logging level ("debug", "info",
+                           "warn", "error", "fatal") (default "info")
+      --tls                Use TLS; implied by --tlsverify
+      --tlscacert string   Trust certs signed only by this CA (default
+                           "C:\\Users\\lenovo\\.docker\\ca.pem")
+      --tlscert string     Path to TLS certificate file (default
+                           "C:\\Users\\lenovo\\.docker\\cert.pem")
+      --tlskey string      Path to TLS key file (default
+                           "C:\\Users\\lenovo\\.docker\\key.pem")
+      --tlsverify          Use TLS and verify the remote
+  -v, --version            Print version information and quit
+
+Run 'docker COMMAND --help' for more information on a command.
+
+For more help on how to use Docker, head to https://docs.docker.com/go/guides/
+
+
+C:\Users\lenovo>docker list -a
+unknown shorthand flag: 'a' in -a
+See 'docker --help'.
+
+Usage:  docker [OPTIONS] COMMAND
+
+A self-sufficient runtime for containers
+
+Common Commands:
+  run         Create and run a new container from an image
+  exec        Execute a command in a running container
+  ps          List containers
+  build       Build an image from a Dockerfile
+  pull        Download an image from a registry
+  push        Upload an image to a registry
+  images      List images
+  login       Log in to a registry
+  logout      Log out from a registry
+  search      Search Docker Hub for images
+  version     Show the Docker version information
+  info        Display system-wide information
+
+Management Commands:
+  builder     Manage builds
+  buildx*     Docker Buildx (Docker Inc., v0.11.2-desktop.5)
+  compose*    Docker Compose (Docker Inc., v2.23.0-desktop.1)
+  container   Manage containers
+  context     Manage contexts
+  dev*        Docker Dev Environments (Docker Inc., v0.1.0)
+  extension*  Manages Docker extensions (Docker Inc., v0.2.20)
+  image       Manage images
+  init*       Creates Docker-related starter files for your project (Docker Inc., v0.1.0-beta.9)
+  manifest    Manage Docker image manifests and manifest lists
+  network     Manage networks
+  plugin      Manage plugins
+  sbom*       View the packaged-based Software Bill Of Materials (SBOM) for an image (Anchore Inc., 0.6.0)
+  scan*       Docker Scan (Docker Inc., v0.26.0)
+  scout*      Docker Scout (Docker Inc., v1.0.9)
+  system      Manage Docker
+  trust       Manage trust on Docker images
+  volume      Manage volumes
+
+Swarm Commands:
+  swarm       Manage Swarm
+
+Commands:
+  attach      Attach local standard input, output, and error streams to a running container
+  commit      Create a new image from a container's changes
+  cp          Copy files/folders between a container and the local filesystem
+  create      Create a new container
+  diff        Inspect changes to files or directories on a container's filesystem
+  events      Get real time events from the server
+  export      Export a container's filesystem as a tar archive
+  history     Show the history of an image
+  import      Import the contents from a tarball to create a filesystem image
+  inspect     Return low-level information on Docker objects
+  kill        Kill one or more running containers
+  load        Load an image from a tar archive or STDIN
+  logs        Fetch the logs of a container
+  pause       Pause all processes within one or more containers
+  port        List port mappings or a specific mapping for the container
+  rename      Rename a container
+  restart     Restart one or more containers
+  rm          Remove one or more containers
+  rmi         Remove one or more images
+  save        Save one or more images to a tar archive (streamed to STDOUT by default)
+  start       Start one or more stopped containers
+  stats       Display a live stream of container(s) resource usage statistics
+  stop        Stop one or more running containers
+  tag         Create a tag TARGET_IMAGE that refers to SOURCE_IMAGE
+  top         Display the running processes of a container
+  unpause     Unpause all processes within one or more containers
+  update      Update configuration of one or more containers
+  wait        Block until one or more containers stop, then print their exit codes
+
+Global Options:
+      --config string      Location of client config files (default
+                           "C:\\Users\\lenovo\\.docker")
+  -c, --context string     Name of the context to use to connect to the
+                           daemon (overrides DOCKER_HOST env var and
+                           default context set with "docker context use")
+  -D, --debug              Enable debug mode
+  -H, --host list          Daemon socket to connect to
+  -l, --log-level string   Set the logging level ("debug", "info",
+                           "warn", "error", "fatal") (default "info")
+      --tls                Use TLS; implied by --tlsverify
+      --tlscacert string   Trust certs signed only by this CA (default
+                           "C:\\Users\\lenovo\\.docker\\ca.pem")
+      --tlscert string     Path to TLS certificate file (default
+                           "C:\\Users\\lenovo\\.docker\\cert.pem")
+      --tlskey string      Path to TLS key file (default
+                           "C:\\Users\\lenovo\\.docker\\key.pem")
+      --tlsverify          Use TLS and verify the remote
+  -v, --version            Print version information and quit
+
+Run 'docker COMMAND --help' for more information on a command.
+
+For more help on how to use Docker, head to https://docs.docker.com/go/guides/
+
+
+C:\Users\lenovo>docker list
+docker: 'list' is not a docker command.
+See 'docker --help'
+
+C:\Users\lenovo>docker container list
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS NAMES
+
+C:\Users\lenovo>docker container list -a
+CONTAINER ID   IMAGE               COMMAND                  CREATED          STATUS                      PORTS  NAMES
+a28770578510   ubuntu:latest       "bash"                   10 minutes ago   Exited (0) 47 seconds ago  youthful_yalow
+b93f9ff47d14   ubuntu              "-it ubuntu bash"        5 hours ago      Created  tender_ritchie
+ffb66dd43d49   ubuntu              "-it ubuntu bash"        5 hours ago      Created  frosty_keldysh
+4d0a693d40c4   postgres            "docker-entrypoint.s…"   4 weeks ago      Exited (0) 2 weeks ago  audio-recording-app-db
+d294137b4b36   simplebank:latest   "./app/main"             6 weeks ago      Created                     0.0.0.0:8080->8080/tcp  simplebank
+e631efb44faa   postgres            "docker-entrypoint.s…"   3 months ago     Exited (0) 3 months ago  Solar
+562fdde96225   postgres            "docker-entrypoint.s…"   4 months ago     Exited (0) 4 weeks ago  postgres12
+7c4b1aaf0172   mafia-bot           "./main"                 4 months ago     Exited (0) 4 months ago     0.0.0.0:8080->8080/tcp  peaceful_galois
+
+C:\Users\lenovo>docker container rm a28770578510
+a28770578510
+
+C:\Users\lenovo>docker container list -a
+CONTAINER ID   IMAGE               COMMAND                  CREATED        STATUS                    PORTS                    NAMES
+b93f9ff47d14   ubuntu              "-it ubuntu bash"        5 hours ago    Created                                            tender_ritchie
+ffb66dd43d49   ubuntu              "-it ubuntu bash"        5 hours ago    Created                                            frosty_keldysh
+4d0a693d40c4   postgres            "docker-entrypoint.s…"   4 weeks ago    Exited (0) 2 weeks ago                             audio-recording-app-db
+d294137b4b36   simplebank:latest   "./app/main"             6 weeks ago    Created                   0.0.0.0:8080->8080/tcp   simplebank
+e631efb44faa   postgres            "docker-entrypoint.s…"   3 months ago   Exited (0) 3 months ago                            Solar
+562fdde96225   postgres            "docker-entrypoint.s…"   4 months ago   Exited (0) 4 weeks ago                             postgres12
+7c4b1aaf0172   mafia-bot           "./main"                 4 months ago   Exited (0) 4 months ago   0.0.0.0:8080->8080/tcp   peaceful_galois
+
+C:\Users\lenovo>docker pull amazonlinux:latest
+latest: Pulling from library/amazonlinux
+a98bc98bb91a: Pull complete
+Digest: sha256:6d13678b68a6db66e13f1c738a721e5df41e9911a89c47082584cc76599b1ce8
+Status: Downloaded newer image for amazonlinux:latest
+docker.io/library/amazonlinux:latest
+
+What's Next?
+  View a summary of image vulnerabilities and recommendations →docker scout quickview amazonlinux:latest
+
+C:\Users\lenovo>docker run -it amazonlinux:latest bash
+bash-5.2# apt update
+bash: apt: command not found
+bash-5.2# yum update
+Amazon Linux 2023 repository    8.4 MB/s |  21 MB     00:02
+Last metadata expiration check: 0:00:03 ago on Wed Nov  8 15:12:16 2023.
+Dependencies resolved.
+Nothing to do.
+Complete!
+bash-5.2# yaml intall nano
+bash: $'\320\275yaml': command not found
+bash-5.2#yum intall nano
+No such command: intall. Please use /usr/bin/yum --help
+It could be a YUM plugin command, try: "yum install 'dnf-command(intall)'"
+bash-5.2# yum install nano
+Last metadata expiration check: 0:01:57 ago on Wed Nov  8 15:12:16 2023.
+Dependencies resolved.
+================================================================
+ Package Arch      Version                 Repository      Size
+================================================================
+Installing:
+ nano    x86_64    5.8-3.amzn2023.0.3      amazonlinux    712 k
+
+Transaction Summary
+================================================================
+Install  1 Package
+
+Total download size: 712 k
+Installed size: 2.8 M
+Is this ok [y/N]: y
+Downloading Packages:
+nano-5.8-3.amzn2023.0.3.x86_64. 4.0 MB/s | 712 kB     00:00
+----------------------------------------------------------------
+Total                           388 kB/s | 712 kB     00:01
+Running transaction check
+Transaction check succeeded.
+Running transaction test
+Transaction test succeeded.
+Running transaction
+  Preparing        :                                        1/1
+  Installing       : nano-5.8-3.amzn2023.0.3.x86_64         1/1
+  Running scriptlet: nano-5.8-3.amzn2023.0.3.x86_64         1/1
+  Verifying        : nano-5.8-3.amzn2023.0.3.x86_64         1/1
+
+Installed:
+  nano-5.8-3.amzn2023.0.3.x86_64
+
+Complete!
+bash-5.2# yum install htop
+Last metadata expiration check: 0:02:08 ago on Wed Nov  8 15:12:16 2023.
+Dependencies resolved.
+================================================================
+ Package
+        Arch     Version                    Repository     Size
+================================================================
+Installing:
+ htop   x86_64   3.2.1-87.amzn2023.0.3      amazonlinux   183 k
+
+Transaction Summary
+================================================================
+Install  1 Package
+
+Total download size: 183 k
+Installed size: 432 k
+Is this ok [y/N]: y
+Downloading Packages:
+htop-3.2.1-87.amzn2023.0.3.x86_ 1.1 MB/s | 183 kB     00:00
+----------------------------------------------------------------
+Total                           104 kB/s | 183 kB     00:01
+Running transaction check
+Transaction check succeeded.
+Running transaction test
+Transaction test succeeded.
+Running transaction
+  Preparing        :                                        1/1
+  Installing       : htop-3.2.1-87.amzn2023.0.3.x86_64      1/1
+  Running scriptlet: htop-3.2.1-87.amzn2023.0.3.x86_64      1/1
+  Verifying        : htop-3.2.1-87.amzn2023.0.3.x86_64      1/1
+
+Installed:
+  htop-3.2.1-87.amzn2023.0.3.x86_64
+
+Complete!
+bash-5.2# htop
+bash-5.2# exit
+exit
+
+C:\Users\lenovo>docker container rm amazonlinux:latest
+Error response from daemon: No such container: amazonlinux:latest
+
+C:\Users\lenovo>docker list -a
+unknown shorthand flag: 'a' in -a
+See 'docker --help'.
+
+Usage:  docker [OPTIONS] COMMAND
+
+A self-sufficient runtime for containers
+
+Common Commands:
+  run         Create and run a new container from an image
+  exec        Execute a command in a running container
+  ps          List containers
+  build       Build an image from a Dockerfile
+  pull        Download an image from a registry
+  push        Upload an image to a registry
+  images      List images
+  login       Log in to a registry
+  logout      Log out from a registry
+  search      Search Docker Hub for images
+  version     Show the Docker version information
+  info        Display system-wide information
+
+Management Commands:
+  builder     Manage builds
+  buildx*     Docker Buildx (Docker Inc., v0.11.2-desktop.5)
+  compose*    Docker Compose (Docker Inc., v2.23.0-desktop.1)
+  container   Manage containers
+  context     Manage contexts
+  dev*        Docker Dev Environments (Docker Inc., v0.1.0)
+  extension*  Manages Docker extensions (Docker Inc., v0.2.20)
+  image       Manage images
+  init*       Creates Docker-related starter files for your project (Docker Inc., v0.1.0-beta.9)
+  manifest    Manage Docker image manifests and manifest lists
+  network     Manage networks
+  plugin      Manage plugins
+  sbom*       View the packaged-based Software Bill Of Materials (SBOM) for an image (Anchore Inc., 0.6.0)
+  scan*       Docker Scan (Docker Inc., v0.26.0)
+  scout*      Docker Scout (Docker Inc., v1.0.9)
+  system      Manage Docker
+  trust       Manage trust on Docker images
+  volume      Manage volumes
+
+Swarm Commands:
+  swarm       Manage Swarm
+
+Commands:
+  attach      Attach local standard input, output, and error streams to a running container
+  commit      Create a new image from a container's changes
+  cp          Copy files/folders between a container and the local filesystem
+  create      Create a new container
+  diff        Inspect changes to files or directories on a container's filesystem
+  events      Get real time events from the server
+  export      Export a container's filesystem as a tar archive
+  history     Show the history of an image
+  import      Import the contents from a tarball to create a filesystem image
+  inspect     Return low-level information on Docker objects
+  kill        Kill one or more running containers
+  load        Load an image from a tar archive or STDIN
+  logs        Fetch the logs of a container
+  pause       Pause all processes within one or more containers
+  port        List port mappings or a specific mapping for the container
+  rename      Rename a container
+  restart     Restart one or more containers
+  rm          Remove one or more containers
+  rmi         Remove one or more images
+  save        Save one or more images to a tar archive (streamed to STDOUT by default)
+  start       Start one or more stopped containers
+  stats       Display a live stream of container(s) resource usage statistics
+  stop        Stop one or more running containers
+  tag         Create a tag TARGET_IMAGE that refers to SOURCE_IMAGE
+  top         Display the running processes of a container
+  unpause     Unpause all processes within one or more containers
+  update      Update configuration of one or more containers
+  wait        Block until one or more containers stop, then print their exit codes
+
+Global Options:
+      --config string      Location of client config files (default
+                           "C:\\Users\\lenovo\\.docker")
+  -c, --context string     Name of the context to use to connect to the
+                           daemon (overrides DOCKER_HOST env var and
+                           default context set with "docker context use")
+  -D, --debug              Enable debug mode
+  -H, --host list          Daemon socket to connect to
+  -l, --log-level string   Set the logging level ("debug", "info",
+                           "warn", "error", "fatal") (default "info")
+      --tls                Use TLS; implied by --tlsverify
+      --tlscacert string   Trust certs signed only by this CA (default
+                           "C:\\Users\\lenovo\\.docker\\ca.pem")
+      --tlscert string     Path to TLS certificate file (default
+                           "C:\\Users\\lenovo\\.docker\\cert.pem")
+      --tlskey string      Path to TLS key file (default
+                           "C:\\Users\\lenovo\\.docker\\key.pem")
+      --tlsverify          Use TLS and verify the remote
+  -v, --version            Print version information and quit
+
+Run 'docker COMMAND --help' for more information on a command.
+
+For more help on how to use Docker, head to https://docs.docker.com/go/guides/
+
+
+C:\Users\lenovo>docker container list -a
+CONTAINER ID   IMAGE                COMMAND                  CREATED         STATUS                          PORTS
+      NAMES
+aadabe656b7c   amazonlinux:latest   "bash"                   4 minutes ago   Exited (0) About a minute ago
+      jovial_hamilton
+b93f9ff47d14   ubuntu               "-it ubuntu bash"        5 hours ago     Created
+      tender_ritchie
+ffb66dd43d49   ubuntu               "-it ubuntu bash"        5 hours ago     Created
+      frosty_keldysh
+4d0a693d40c4   postgres             "docker-entrypoint.s…"   4 weeks ago     Exited (0) 2 weeks ago
+      audio-recording-app-db
+d294137b4b36   simplebank:latest    "./app/main"             6 weeks ago     Created                         0.0.0.0:8080->8080/tcp   simplebank
+e631efb44faa   postgres             "docker-entrypoint.s…"   3 months ago    Exited (0) 3 months ago
+      Solar
+562fdde96225   postgres             "docker-entrypoint.s…"   4 months ago    Exited (0) 4 weeks ago
+      postgres12
+7c4b1aaf0172   mafia-bot            "./main"                 4 months ago    Exited (0) 4 months ago         0.0.0.0:8080->8080/tcp   peaceful_galois
+
+C:\Users\lenovo>docker container rm amazonlinux:latest
+Error response from daemon: No such container: amazonlinux:latest
+
+C:\Users\lenovo>docker container rm aadabe656b7c
+aadabe656b7c
+
+C:\Users\lenovo>docker run --rm ubuntu:20.04 cat /etc/os-release
+                                                               Unable to find image 'ubuntu:20.04' locally
+docker: Error response from daemon: Get "https://registry-1.docker.io/v2/": dialing registry-1.docker.io:443 with direct connection: resolving host registry-1.docker.io: lookup registry-1.docker.io: getaddrinfow: This is usually a temporary error during hostname resolution and means that the local server did not receive a response from an authoritative server.
+See 'docker run --help'.
+
+C:\Users\lenovo>docker pull docker:20.04
+Error response from daemon: Get "https://registry-1.docker.io/v2/": dialing registry-1.docker.io:443 with direct connection: resolving host registry-1.docker.io: lookup registry-1.docker.io: getaddrinfow: This is usually a temporary error during hostname resolution and means that the local server did not receive a response from an authoritative server.
+
+C:\Users\lenovo>docker pull ubuntu:20.04
+20.04: Pulling from library/ubuntu
+96d54c3075c9: Pull complete
+Digest: sha256:ed4a42283d9943135ed87d4ee34e542f7f5ad9ecf2f244870e23122f703f91c2
+Status: Downloaded newer image for ubuntu:20.04
+docker.io/library/ubuntu:20.04
+
+What's Next?
+  View a summary of image vulnerabilities and recommendations →docker scout quickview ubuntu:20.04
+
+C:\Users\lenovo>docker run --rm ubuntu:20.04 cat /etc/os-release
+
+NAME="Ubuntu"
+VERSION="20.04.6 LTS (Focal Fossa)"
+ID=ubuntu
+ID_LIKE=debian
+PRETTY_NAME="Ubuntu 20.04.6 LTS"
+VERSION_ID="20.04"
+HOME_URL="https://www.ubuntu.com/"
+SUPPORT_URL="https://help.ubuntu.com/"
+BUG_REPORT_URL="https://bugs.launchpad.net/ubuntu/"
+PRIVACY_POLICY_URL="https://www.ubuntu.com/legal/terms-and-policies/privacy-policy"
+VERSION_CODENAME=focal
+UBUNTU_CODENAME=focal
+
+C:\Users\lenovo>docker contatiner rm ubuntu:20.04
+docker: 'contatiner' is not a docker command.
+See 'docker --help'
+
+C:\Users\lenovo>docker container rm ubuntu:20.04
+Error response from daemon: No such container: ubuntu:20.04
+
+C:\Users\lenovo>docker container list -a
+CONTAINER ID   IMAGE               COMMAND                  CREATED        STATUS                    PORTS                    NAMES
+b93f9ff47d14   ubuntu              "-it ubuntu bash"        5 hours ago    Created                                            tender_ritchie
+ffb66dd43d49   ubuntu              "-it ubuntu bash"        5 hours ago    Created                                            frosty_keldysh
+4d0a693d40c4   postgres            "docker-entrypoint.s…"   4 weeks ago    Exited (0) 2 weeks ago                             audio-recording-app-db
+d294137b4b36   simplebank:latest   "./app/main"             6 weeks ago    Created                   0.0.0.0:8080->8080/tcp   simplebank
+e631efb44faa   postgres            "docker-entrypoint.s…"   3 months ago   Exited (0) 3 months ago                            Solar
+562fdde96225   postgres            "docker-entrypoint.s…"   4 months ago   Exited (0) 4 weeks ago                             postgres12
+7c4b1aaf0172   mafia-bot           "./main"                 4 months ago   Exited (0) 4 months ago   0.0.0.0:8080->8080/tcp   peaceful_galois
+
+C:\Users\lenovo>docker container rm b93f9ff47d14 | ffb66dd43d49'ffb66dd43d49' is not recognized as an internal or external command,
+operable program or batch file.
+
+C:\Users\lenovo>docker container rm b93f9ff47d14 | docker container rm ffb66dd43d49
+ffb66dd43d49
+
+C:\Users\lenovo>docker container list -a
+CONTAINER ID   IMAGE               COMMAND                  CREATED        STATUS                    PORTS                    NAMES
+4d0a693d40c4   postgres            "docker-entrypoint.s…"   4 weeks ago    Exited (0) 2 weeks ago                             audio-recording-app-db
+d294137b4b36   simplebank:latest   "./app/main"             6 weeks ago    Created                   0.0.0.0:8080->8080/tcp   simplebank
+e631efb44faa   postgres            "docker-entrypoint.s…"   3 months ago   Exited (0) 3 months ago                            Solar
+562fdde96225   postgres            "docker-entrypoint.s…"   4 months ago   Exited (0) 4 weeks ago                             postgres12
+7c4b1aaf0172   mafia-bot           "./main"                 4 months ago   Exited (0) 4 months ago   0.0.0.0:8080->8080/tcp   peaceful_galois
+
+C:\Users\lenovo>
