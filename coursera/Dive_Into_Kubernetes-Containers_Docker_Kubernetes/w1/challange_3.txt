@@ -1,0 +1,192 @@
+Windows PowerShell
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Install the latest PowerShell for new features and improvements! https://aka.ms/PSWindows
+
+PS C:\Users\lenovo> mkdir web_page
+
+
+    Directory: C:\Users\lenovo
+
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d-----         11/8/2023   6:40 PM                web_page
+
+
+PS C:\Users\lenovo> echo "Hello, from nginx 1" > web_page/index_1.html
+PS C:\Users\lenovo> echo "Hello, from nginx 2" > web_page/index_2.html
+PS C:\Users\lenovo> echo "Hello, from nginx 3" > web_page/index_3.html
+PS C:\Users\lenovo> rm web_page
+
+Confirm
+The item at C:\Users\lenovo\web_page has children and the Recurse parameter was not specified. If you continue, all children will be
+ removed with the item. Are you sure you want to continue?
+[Y] Yes  [A] Yes to All  [N] No  [L] No to All  [S] Suspend  [?] Help (default is "Y"): Y
+PS C:\Users\lenovo>  echo "Hello, from nginx 1" > web_page_1/index.html
+out-file : Could not find a part of the path 'C:\Users\lenovo\web_page_1\index.html'.
+At line:1 char:2
++  echo "Hello, from nginx 1" > web_page_1/index.html
++  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : OpenError: (:) [Out-File], DirectoryNotFoundException
+    + FullyQualifiedErrorId : FileOpenFailure,Microsoft.PowerShell.Commands.OutFileCommand
+
+PS C:\Users\lenovo> mkdir web_page_1
+
+
+    Directory: C:\Users\lenovo
+
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d-----         11/8/2023   6:55 PM                web_page_1
+
+
+PS C:\Users\lenovo> mkdir web_page_2
+
+
+    Directory: C:\Users\lenovo
+
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d-----         11/8/2023   6:55 PM                web_page_2
+
+
+PS C:\Users\lenovo> mkdir web_page_3
+
+
+    Directory: C:\Users\lenovo
+
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d-----         11/8/2023   6:55 PM                web_page_3
+
+
+PS C:\Users\lenovo>  echo "Hello, from nginx 1" > web_page_1/index.html
+PS C:\Users\lenovo>  echo "Hello, from nginx 2" > web_page_2/index.html
+PS C:\Users\lenovo>  echo "Hello, from nginx 3" > web_page_3/index.html
+PS C:\Users\lenovo> docker run -d --rm -P -v web_page_1:/usr/share/nginx/html nginx
+Unable to find image 'nginx:latest' locally
+latest: Pulling from library/nginx
+578acb154839: Pull complete
+e398db710407: Pull complete85c41ebe6d66: Pull complete7170a263b582: Pull complete8f28d06e2e2e: Pull complete6f837de2f887: Pull complete
+c1dfc7e1671e: Pull complete
+Digest: sha256:86e53c4c16a6a276b204b0fd3a8143d86547c967dc8258b3d47c3a21bb68d3c6
+Status: Downloaded newer image for nginx:latest
+c5bda2754d1ef28f75a52785d855b8cd6a030977b62d0b3399a8a7072ca371ed
+PS C:\Users\lenovo> docker run -d --rm -P -v web_page_2:/usr/share/nginx/html nginx
+6c2b28ecb74dba81d09a71615776d620c6e1df8f6a96ed949cf63588300359ea
+PS C:\Users\lenovo> docker run -d --rm -P -v web_page_3:/usr/share/nginx/html nginx
+a3fdcb90cf84f82112aa42e66302c393a763a0bc5ac33bcf0a976373bc493bf6
+PS C:\Users\lenovo> docker ps
+CONTAINER ID   IMAGE     COMMAND                  CREATED         STATUS         PORTS                   NAMES
+a3fdcb90cf84   nginx     "/docker-entrypoint.…"   5 seconds ago   Up 4 seconds   0.0.0.0:32770->80/tcp   thirsty_wilbur
+6c2b28ecb74d   nginx     "/docker-entrypoint.…"   9 seconds ago   Up 9 seconds   0.0.0.0:32769->80/tcp   jolly_austin
+c5bda2754d1e   nginx     "/docker-entrypoint.…"   4 minutes ago   Up 4 minutes   0.0.0.0:32768->80/tcp   suspicious_gauss
+PS C:\Users\lenovo> echo "Hello, from nginx 1" > web_page_1/index.html
+PS C:\Users\lenovo> http://localhost:32770
+http://localhost:32770 : The term 'http://localhost:32770' is not recognized as the name of a cmdlet, function, script file, or
+operable program. Check the spelling of the name, or if a path was included, verify that the path is correct and try again.
+At line:1 char:1
++ http://localhost:32770
++ ~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (http://localhost:32770:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+
+PS C:\Users\lenovo> curl http://localhost:32770
+
+
+StatusCode        : 200
+StatusDescription : OK
+Content           : <!DOCTYPE html>
+                    <html>                    <head>                    <title>Welcome to nginx!</title>                    <style>                    html { color-scheme: light dark; }
+                    body { width: 35em; margin: 0 auto;
+                    font-family: Tahoma, Verdana, Arial, sans-serif; }
+                    </style...
+RawContent        : HTTP/1.1 200 OK
+                    Connection: keep-alive
+                    Accept-Ranges: bytes
+                    Content-Length: 615
+                    Content-Type: text/html
+                    Date: Wed, 08 Nov 2023 17:12:18 GMT
+                    ETag: "6537cac7-267"
+                    Last-Modified: Tue, 24 Oct 2023 ...
+Forms             : {}
+Headers           : {[Connection, keep-alive], [Accept-Ranges, bytes], [Content-Length, 615], [Content-Type, text/html]...}
+Images            : {}
+InputFields       : {}
+Links             : {@{innerHTML=nginx.org; innerText=nginx.org; outerHTML=<A href="http://nginx.org/">nginx.org</A>;
+                    outerText=nginx.org; tagName=A; href=http://nginx.org/}, @{innerHTML=nginx.com; innerText=nginx.com;
+                    outerHTML=<A href="http://nginx.com/">nginx.com</A>; outerText=nginx.com; tagName=A; href=http://nginx.com/}}
+ParsedHtml        : mshtml.HTMLDocumentClass
+RawContentLength  : 615
+
+
+
+PS C:\Users\lenovo> curl http://localhost:32769
+
+
+StatusCode        : 200
+StatusDescription : OK
+Content           : <!DOCTYPE html>
+                    <html>                    <head>                    <title>Welcome to nginx!</title>                    <style>                    html { color-scheme: light dark; }
+                    body { width: 35em; margin: 0 auto;
+                    font-family: Tahoma, Verdana, Arial, sans-serif; }
+                    </style...
+RawContent        : HTTP/1.1 200 OK
+                    Connection: keep-alive
+                    Accept-Ranges: bytes
+                    Content-Length: 615
+                    Content-Type: text/html
+                    Date: Wed, 08 Nov 2023 17:12:47 GMT
+                    ETag: "6537cac7-267"
+                    Last-Modified: Tue, 24 Oct 2023 ...
+Forms             : {}
+Headers           : {[Connection, keep-alive], [Accept-Ranges, bytes], [Content-Length, 615], [Content-Type, text/html]...}
+Images            : {}
+InputFields       : {}
+Links             : {@{innerHTML=nginx.org; innerText=nginx.org; outerHTML=<A href="http://nginx.org/">nginx.org</A>;
+                    outerText=nginx.org; tagName=A; href=http://nginx.org/}, @{innerHTML=nginx.com; innerText=nginx.com;
+                    outerHTML=<A href="http://nginx.com/">nginx.com</A>; outerText=nginx.com; tagName=A; href=http://nginx.com/}}
+ParsedHtml        : mshtml.HTMLDocumentClass
+RawContentLength  : 615
+
+
+
+PS C:\Users\lenovo> curl http://localhost:32768
+
+
+StatusCode        : 200
+StatusDescription : OK
+Content           : <!DOCTYPE html>
+                    <html>
+                    <head>
+                    <title>Welcome to nginx!</title>
+                    <style>
+                    html { color-scheme: light dark; }
+                    body { width: 35em; margin: 0 auto;
+                    font-family: Tahoma, Verdana, Arial, sans-serif; }
+                    </style...
+RawContent        : HTTP/1.1 200 OK
+                    Connection: keep-alive
+                    Accept-Ranges: bytes
+                    Content-Length: 615
+                    Content-Type: text/html
+                    Date: Wed, 08 Nov 2023 17:12:51 GMT
+                    ETag: "6537cac7-267"
+                    Last-Modified: Tue, 24 Oct 2023 ...
+Forms             : {}
+Headers           : {[Connection, keep-alive], [Accept-Ranges, bytes], [Content-Length, 615], [Content-Type, text/html]...}
+Images            : {}
+InputFields       : {}
+Links             : {@{innerHTML=nginx.org; innerText=nginx.org; outerHTML=<A href="http://nginx.org/">nginx.org</A>;
+                    outerText=nginx.org; tagName=A; href=http://nginx.org/}, @{innerHTML=nginx.com; innerText=nginx.com;
+                    outerHTML=<A href="http://nginx.com/">nginx.com</A>; outerText=nginx.com; tagName=A; href=http://nginx.com/}}
+ParsedHtml        : mshtml.HTMLDocumentClass
+RawContentLength  : 615
+
+
+
+PS C:\Users\lenovo>
