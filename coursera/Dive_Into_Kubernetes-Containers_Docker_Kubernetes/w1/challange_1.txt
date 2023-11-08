@@ -1,0 +1,241 @@
+
+C:\Users\lenovo>docker pull alpine:latest
+latest: Pulling from library/alpine
+96526aa774ef: Pull complete
+Digest: sha256:eece025e432126ce23f223450a0326fbebde39cdf496a85d8c016293fc851978
+Status: Downloaded newer image for alpine:latest
+docker.io/library/alpine:latest
+
+What's Next?
+  View a summary of image vulnerabilities and recommendations → docker scout quickview alpine:latest
+
+C:\Users\lenovo>docker scout quickview alpine:latest
+    v SBOM of image already cached, 19 packages indexed
+
+  Target   │  alpine:latest  │    0C     0H     0M     0L     1?
+    digest │  8ca4688f4f35   │
+
+What's Next?
+  View vulnerabilities → docker scout cves alpine:latest
+  Include policy results in your quickview by supplying an organization → docker scout quickview alpine:latest --org <organization>
+
+
+C:\Users\lenovo>docker history 8ca4688f4f35
+IMAGE          CREATED       CREATED BY                                      SIZE      COMMENT
+8ca4688f4f35   5 weeks ago   /bin/sh -c #(nop)  CMD ["/bin/sh"]              0B
+<missing>      5 weeks ago   /bin/sh -c #(nop) ADD file:756183bba9c7f4593…   7.34MB
+
+C:\Users\lenovo>docker rmi 8ca4688f4f35
+Untagged: alpine:latest
+Untagged: alpine@sha256:eece025e432126ce23f223450a0326fbebde39cdf496a85d8c016293fc851978
+Deleted: sha256:8ca4688f4f356596b5ae539337c9941abc78eda10021d35cbc52659c74d9b443
+Deleted: sha256:cc2447e1835a40530975ab80bb1f872fbab0f2a0faecf2ab16fbbb89b3589438
+
+C:\Users\lenovo>docker myubunt pull ubuntu:20:04
+docker: 'myubunt' is not a docker command.
+See 'docker --help'
+
+C:\Users\lenovo>docker pull ubuntu:20:04
+invalid reference format
+
+C:\Users\lenovo>docker image pull ubuntu:20.04
+20.04: Pulling from library/ubuntu
+96d54c3075c9: Pull complete
+Digest: sha256:ed4a42283d9943135ed87d4ee34e542f7f5ad9ecf2f244870e23122f703f91c2
+Status: Downloaded newer image for ubuntu:20.04
+docker.io/library/ubuntu:20.04
+
+C:\Users\lenovo> docker image scout quickview alpine:latest
+
+Usage:  docker image COMMAND
+
+Manage images
+
+Commands:
+  build       Build an image from a Dockerfile
+  history     Show the history of an image
+  import      Import the contents from a tarball to create a filesystem image
+  inspect     Display detailed information on one or more images
+  load        Load an image from a tar archive or STDIN
+  ls          List images
+  prune       Remove unused images
+  pull        Download an image from a registry
+  push        Upload an image to a registry
+  rm          Remove one or more images
+  save        Save one or more images to a tar archive (streamed to STDOUT by default)
+  tag         Create a tag TARGET_IMAGE that refers to SOURCE_IMAGE
+
+Run 'docker image COMMAND --help' for more information on a command.
+
+C:\Users\lenovo>docker image inspect ubuntu:20.04
+[
+    {
+        "Id": "sha256:bf40b7bc7a11b43785755d3c5f23dee03b08e988b327a2f10b22d01d5dc5259d",
+        "RepoTags": [
+            "ubuntu:20.04"
+        ],
+        "RepoDigests": [
+            "ubuntu@sha256:ed4a42283d9943135ed87d4ee34e542f7f5ad9ecf2f244870e23122f703f91c2"
+        ],
+        "Parent": "",
+        "Comment": "",
+        "Created": "2023-10-03T10:45:52.164348549Z",
+        "Container": "fddb7fa97b54a775ce640eb370a471fcb787a47eaa56c5f99d8af66a731d5a16",
+        "ContainerConfig": {
+            "Hostname": "fddb7fa97b54",
+            "Domainname": "",
+            "User": "",
+            "AttachStdin": false,
+            "AttachStdout": false,
+            "AttachStderr": false,
+            "Tty": false,
+            "OpenStdin": false,
+            "StdinOnce": false,
+            "Env": [
+                "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+            ],
+            "Cmd": [
+                "/bin/sh",
+                "-c",
+                "#(nop) ",
+                "CMD [\"/bin/bash\"]"
+            ],
+            "Image": "sha256:385aef6d98a472103a530f3ccec4703d5de7b85c2134a875c06250d51bffc25b",
+            "Volumes": null,
+            "WorkingDir": "",
+            "Entrypoint": null,
+            "OnBuild": null,
+            "Labels": {
+                "org.opencontainers.image.ref.name": "ubuntu",
+                "org.opencontainers.image.version": "20.04"
+            }
+        },
+        "DockerVersion": "20.10.21",
+        "Author": "",
+        "Config": {
+            "Hostname": "",
+            "Domainname": "",
+            "User": "",
+            "AttachStdin": false,
+            "AttachStdout": false,
+            "AttachStderr": false,
+            "Tty": false,
+            "OpenStdin": false,
+            "StdinOnce": false,
+            "Env": [
+                "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+            ],
+            "Cmd": [
+                "/bin/bash"
+            ],
+            "Image": "sha256:385aef6d98a472103a530f3ccec4703d5de7b85c2134a875c06250d51bffc25b",
+            "Volumes": null,
+            "WorkingDir": "",
+            "Entrypoint": null,
+            "OnBuild": null,
+            "Labels": {
+                "org.opencontainers.image.ref.name": "ubuntu",
+                "org.opencontainers.image.version": "20.04"
+            }
+        },
+        "Architecture": "amd64",
+        "Os": "linux",
+        "Size": 72792577,
+        "VirtualSize": 72792577,
+        "GraphDriver": {
+            "Data": {
+                "MergedDir": "/var/lib/docker/overlay2/32c1d8d4d2d8c36bde8c3899001e3ff6f7f782cc3db9b7e712326f28b0960108/merged",
+                "UpperDir": "/var/lib/docker/overlay2/32c1d8d4d2d8c36bde8c3899001e3ff6f7f782cc3db9b7e712326f28b0960108/diff",
+                "WorkDir": "/var/lib/docker/overlay2/32c1d8d4d2d8c36bde8c3899001e3ff6f7f782cc3db9b7e712326f28b0960108/work"
+            },
+            "Name": "overlay2"
+        },
+        "RootFS": {
+            "Type": "layers",
+            "Layers": [
+                "sha256:6c3e7df31590f02f10cb71fc4eb27653e9b428df2e6e5421a455b062bd2e39f9"
+            ]
+        },
+        "Metadata": {
+            "LastTagTime": "0001-01-01T00:00:00Z"
+        }
+    }
+]
+
+C:\Users\lenovo>docker image rmi ubuntu:20.04
+Untagged: ubuntu:20.04
+Untagged: ubuntu@sha256:ed4a42283d9943135ed87d4ee34e542f7f5ad9ecf2f244870e23122f703f91c2
+Deleted: sha256:bf40b7bc7a11b43785755d3c5f23dee03b08e988b327a2f10b22d01d5dc5259d
+Deleted: sha256:6c3e7df31590f02f10cb71fc4eb27653e9b428df2e6e5421a455b062bd2e39f9
+
+C:\Users\lenovo>docker images
+REPOSITORY                                                TAG
+  IMAGE ID       CREATED         SIZE
+hubproxy.docker.internal:5555/docker/desktop-kubernetes   kubernetes-v1.28.2-cni-v1.3.0-critools-v1.28.0-cri-dockerd-v0.3.4-1-debian  1d7e8203bdb9   4 weeks ago     430MB
+ubuntu                                                    latest
+  e4c58958181a   4 weeks ago     77.8MB
+simplebank                                                latest
+  007c93124372   6 weeks ago     20.9MB
+registry.k8s.io/kube-apiserver                            v1.28.2
+  cdcab12b2dd1   8 weeks ago     126MB
+registry.k8s.io/kube-proxy                                v1.28.2
+  c120fed2beb8   8 weeks ago     73.1MB
+registry.k8s.io/kube-scheduler                            v1.28.2
+  7a5d9d67a13f   8 weeks ago     60.1MB
+registry.k8s.io/kube-controller-manager                   v1.28.2
+  55f13c92defb   8 weeks ago     122MB
+kjconroy/sqlc                                             latest
+  3a1607a04b1f   4 months ago    91.1MB
+mafia-bot                                                 latest
+  39f07ff25b91   4 months ago    926MB
+postgres                                                  latest
+  1921dda0e2c5   4 months ago    412MB
+registry.k8s.io/etcd                                      3.5.9-0
+  73deb9a3f702   5 months ago    294MB
+docker/desktop-vpnkit-controller                          dc331cb22850be0cdd97c84a9cfecaf44a1afb6e
+  556098075b3d   5 months ago    36.2MB
+registry.k8s.io/coredns/coredns                           v1.10.1
+  ead0a4a53df8   9 months ago    53.6MB
+registry.k8s.io/etcd                                      3.5.7-0
+  86b6af7dd652   9 months ago    296MB
+registry.k8s.io/pause                                     3.9
+  e6f181688397   13 months ago   744kB
+docker/desktop-storage-provisioner                        v2.0
+  99f89471f470   2 years ago     41.9MB
+
+C:\Users\lenovo>docker image list
+REPOSITORY                                                TAG
+  IMAGE ID       CREATED         SIZE
+hubproxy.docker.internal:5555/docker/desktop-kubernetes   kubernetes-v1.28.2-cni-v1.3.0-critools-v1.28.0-cri-dockerd-v0.3.4-1-debian  1d7e8203bdb9   4 weeks ago     430MB
+ubuntu                                                    latest
+  e4c58958181a   4 weeks ago     77.8MB
+simplebank                                                latest
+  007c93124372   6 weeks ago     20.9MB
+registry.k8s.io/kube-apiserver                            v1.28.2
+  cdcab12b2dd1   8 weeks ago     126MB
+registry.k8s.io/kube-controller-manager                   v1.28.2
+  55f13c92defb   8 weeks ago     122MB
+registry.k8s.io/kube-proxy                                v1.28.2
+  c120fed2beb8   8 weeks ago     73.1MB
+registry.k8s.io/kube-scheduler                            v1.28.2
+  7a5d9d67a13f   8 weeks ago     60.1MB
+kjconroy/sqlc                                             latest
+  3a1607a04b1f   4 months ago    91.1MB
+mafia-bot                                                 latest
+  39f07ff25b91   4 months ago    926MB
+postgres                                                  latest
+  1921dda0e2c5   4 months ago    412MB
+registry.k8s.io/etcd                                      3.5.9-0
+  73deb9a3f702   5 months ago    294MB
+docker/desktop-vpnkit-controller                          dc331cb22850be0cdd97c84a9cfecaf44a1afb6e
+  556098075b3d   5 months ago    36.2MB
+registry.k8s.io/coredns/coredns                           v1.10.1
+  ead0a4a53df8   9 months ago    53.6MB
+registry.k8s.io/etcd                                      3.5.7-0
+  86b6af7dd652   9 months ago    296MB
+registry.k8s.io/pause                                     3.9
+  e6f181688397   13 months ago   744kB
+docker/desktop-storage-provisioner                        v2.0
+  99f89471f470   2 years ago     41.9MB
+
+C:\Users\lenovo>
