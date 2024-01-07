@@ -1,0 +1,1018 @@
+Selecting previously unselected package libpam-cap:amd64.
+Preparing to unpack .../9-libpam-cap_1%3a2.44-1ubuntu0.22.04.1_amd64.deb ...
+Unpacking libpam-cap:amd64 (1:2.44-1ubuntu0.22.04.1) ...
+Setting up libatm1:amd64 (1:2.5.1-4build2) ...
+Setting up libcap2-bin (1:2.44-1ubuntu0.22.04.1) ...
+Setting up libmnl0:amd64 (1.0.4-3build2) ...
+Setting up libxtables12:amd64 (1.8.7-1ubuntu5.1) ...
+Setting up libmd0:amd64 (1.0.4-1build1) ...
+Setting up libbsd0:amd64 (0.11.5-1) ...
+Setting up libelf1:amd64 (0.186-1build1) ...
+Setting up libpam-cap:amd64 (1:2.44-1ubuntu0.22.04.1) ...
+debconf: unable to initialize frontend: Dialog
+debconf: (No usable dialog-like program is installed, so the dialog based frontend cannot be used. at /usr/share/perl5/Debconf/FrontEnd/Dialog.pm line 78.)
+debconf: falling back to frontend: Readline
+debconf: unable to initialize frontend: Readline
+debconf: (Can't locate Term/ReadLine.pm in @INC (you may need to install the Term::ReadLine module) (@INC contains: /etc/perl /usr/local/lib/x86_64-linux-gnu/perl/5.34.0 /usr/local/share/perl/5.34.0 /usr/lib/x86_64-linux-gnu/perl5/5.34 /usr/share/perl5 /usr/lib/x86_64-linux-gnu/perl-base /usr/lib/x86_64-linux-gnu/perl/5.34 /usr/share/perl/5.34 /usr/local/lib/site_perl) at /usr/share/perl5/Debconf/FrontEnd/Readline.pm line 7.)
+debconf: falling back to frontend: Teletype
+Setting up libbpf0:amd64 (1:0.5.0-1ubuntu22.04.1) ...
+Setting up iproute2 (5.15.0-1ubuntu2) ...
+debconf: unable to initialize frontend: Dialog
+debconf: (No usable dialog-like program is installed, so the dialog based frontend cannot be used. at /usr/share/perl5/Debconf/FrontEnd/Dialog.pm line 78.)
+debconf: falling back to frontend: Readline
+debconf: unable to initialize frontend: Readline
+debconf: (Can't locate Term/ReadLine.pm in @INC (you may need to install the Term::ReadLine module) (@INC contains: /etc/perl /usr/local/lib/x86_64-linux-gnu/perl/5.34.0 /usr/local/share/perl/5.34.0 /usr/lib/x86_64-linux-gnu/perl5/5.34 /usr/share/perl5 /usr/lib/x86_64-linux-gnu/perl-base /usr/lib/x86_64-linux-gnu/perl/5.34 /usr/share/perl/5.34 /usr/local/lib/site_perl) at /usr/share/perl5/Debconf/FrontEnd/Readline.pm line 7.)
+debconf: falling back to frontend: Teletype
+Processing triggers for libc-bin (2.35-0ubuntu3.5) ...
+root@be4c4272ce92:/# ip addr
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host 
+       valid_lft forever preferred_lft forever
+2: tunl0@NONE: <NOARP> mtu 1480 qdisc noop state DOWN group default qlen 1000
+    link/ipip 0.0.0.0 brd 0.0.0.0
+3: sit0@NONE: <NOARP> mtu 1480 qdisc noop state DOWN group default qlen 1000
+    link/sit 0.0.0.0 brd 0.0.0.0
+4: eth0@if5: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP group default 
+    link/ether 76:ad:e7:0f:e6:ca brd ff:ff:ff:ff:ff:ff link-netnsid 0
+    inet 10.4.0.2/24 brd 10.4.0.255 scope global eth0
+       valid_lft forever preferred_lft forever
+    inet6 fe80::74ad:e7ff:fe0f:e6ca/64 scope link 
+       valid_lft forever preferred_lft forever
+root@be4c4272ce92:/# mv /etc/cni/net.d/nerdctl-bridge.conflist /resources
+mv: cannot stat '/etc/cni/net.d/nerdctl-bridge.conflist': No such file or directory
+root@be4c4272ce92:/# exit
+exit
+root@control-plane:~# cat /etc/cni/net.d/nerdctl-bridge.conflist
+{
+  "cniVersion": "1.0.0",
+  "name": "bridge",
+  "nerdctlID": "17f29b073143d8cd97b5bbe492bdeffec1c5fee55cc1fe2112c8b9335f8b6121",
+  "nerdctlLabels": {
+    "nerdctl/default-network": "true"
+  },
+  "plugins": [
+    {
+      "type": "bridge",
+      "bridge": "nerdctl0",
+      "isGateway": true,
+      "ipMasq": true,
+      "hairpinMode": true,
+      "ipam": {
+        "ranges": [
+          [
+            {
+              "gateway": "10.4.0.1",
+              "subnet": "10.4.0.0/24"
+            }
+          ]
+        ],
+        "routes": [
+          {
+            "dst": "0.0.0.0/0"
+          }
+        ],
+        "type": "host-local"
+      }
+    },
+    {
+      "type": "portmap",
+      "capabilities": {
+        "portMappings": true
+      }
+    },
+    {
+      "type": "firewall",
+      "ingressPolicy": "same-bridge"
+    },
+    {
+      "type": "tuning"
+    }
+  ]
+}root@control-plane:~# ^C
+root@control-plane:~# ip addr
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+2: tunl0@NONE: <NOARP> mtu 1480 qdisc noop state DOWN group default qlen 1000
+    link/ipip 0.0.0.0 brd 0.0.0.0
+3: sit0@NONE: <NOARP> mtu 1480 qdisc noop state DOWN group default qlen 1000
+    link/sit 0.0.0.0 brd 0.0.0.0
+4: nerdctl0: <NO-CARRIER,BROADCAST,MULTICAST,UP> mtu 1500 qdisc noqueue state DOWN group default qlen 1000
+    link/ether 2a:95:25:24:5e:22 brd ff:ff:ff:ff:ff:ff
+    inet 10.4.0.1/24 brd 10.4.0.255 scope global nerdctl0
+       valid_lft forever preferred_lft forever
+10: eth0@if11: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP group default 
+    link/ether 02:42:ac:12:00:03 brd ff:ff:ff:ff:ff:ff link-netnsid 0
+    inet 172.18.0.3/16 brd 172.18.255.255 scope global eth0
+       valid_lft forever preferred_lft forever
+root@control-plane:~# mv /etc/cni/net.d/nerdctl-bridge.conflist /resources
+root@control-plane:~# ^[[200~ctr container list~
+-bash: $'\E[200~ctr': command not found
+root@control-plane:~# ctr container list
+CONTAINER    IMAGE    RUNTIME    
+root@control-plane:~# which runc
+/usr/local/sbin/runc
+root@control-plane:~# systemctl status containerd
+● containerd.service - containerd container runtime
+     Loaded: loaded (/etc/systemd/system/containerd.service; enabled; vendor preset: enabled)
+    Drop-In: /etc/systemd/system/containerd.service.d
+             └─00-nomodprobe.conf
+     Active: active (running) since Sun 2024-01-07 11:36:04 UTC; 3h 39min ago
+       Docs: https://containerd.io
+   Main PID: 228 (containerd)
+      Tasks: 16
+     Memory: 127.1M
+     CGroup: /docker/ea06de7023f1274260cb74350d311eb6012652f49b3a5432a8399bf2f3fb9348/system.slice/containerd.service
+             └─228 /usr/local/bin/containerd
+
+Jan 07 14:44:20 control-plane containerd[228]: time="2024-01-07T14:44:20.258166516Z" level=warning msg="cleanup warnings time=\"2024-01-07T1
+4:44:20Z\" level=info msg=\"starting signal loop\" namespace=default pid=17002 runtime=io.containerd.runc.v2\n"
+Jan 07 14:45:26 control-plane containerd[228]: time="2024-01-07T14:45:26.979439803Z" level=info msg="loading plugin \"io.containerd.event.v1
+.publisher\"..." runtime=io.containerd.runc.v2 type=io.containerd.event.v1
+Jan 07 14:45:26 control-plane containerd[228]: time="2024-01-07T14:45:26.979578427Z" level=info msg="loading plugin \"io.containerd.internal
+.v1.shutdown\"..." runtime=io.containerd.runc.v2 type=io.containerd.internal.v1
+Jan 07 14:45:26 control-plane containerd[228]: time="2024-01-07T14:45:26.979615217Z" level=info msg="loading plugin \"io.containerd.ttrpc.v1
+.task\"..." runtime=io.containerd.runc.v2 type=io.containerd.ttrpc.v1
+Jan 07 14:45:26 control-plane containerd[228]: time="2024-01-07T14:45:26.980110064Z" level=info msg="starting signal loop" namespace=default
+ path=/run/containerd/io.containerd.runtime.v2.task/default/be4c4272ce9200695eb58ab993ef8b0902a7837bd59bca96c24b119c094f844b pid=17152 runti
+me=io.containerd.runc.v2
+Jan 07 14:46:33 control-plane containerd[228]: time="2024-01-07T14:46:33.818272218Z" level=info msg="shim disconnected" id=be4c4272ce9200695
+eb58ab993ef8b0902a7837bd59bca96c24b119c094f844b
+Jan 07 14:46:33 control-plane containerd[228]: time="2024-01-07T14:46:33.818344215Z" level=warning msg="cleaning up after shim disconnected"
+ id=be4c4272ce9200695eb58ab993ef8b0902a7837bd59bca96c24b119c094f844b namespace=default
+Jan 07 14:46:33 control-plane containerd[228]: time="2024-01-07T14:46:33.818358933Z" level=info msg="cleaning up dead shim"
+Jan 07 14:46:33 control-plane containerd[228]: time="2024-01-07T14:46:33.825105154Z" level=warning msg="cleanup warnings time=\"2024-01-07T1
+4:46:33Z\" level=info msg=\"starting signal loop\" namespace=default pid=17757 runtime=io.containerd.runc.v2\n"
+Jan 07 14:47:26 control-plane containerd[228]: time="2024-01-07T14:47:26.681719681Z" level=error msg="failed to reload cni configuration aft
+er receiving fs change event(\"/etc/cni/net.d/nerdctl-bridge.conflist\": RENAME)" error="cni config load failed: no network config found in 
+/etc/cni/net.d: cni plugin not initialized: failed to load cni config"
+root@control-plane:~# /resources/catchup installingkubernetes
+Resetting and re-running previous steps, script called with installingkubernetes - executing ansible with tag containerruntimes ... 
+
+PLAY [Reset Kubernetes and Resources] *****************************************************************************************************************
+
+TASK [Gathering Facts] ********************************************************************************************************************************
+ok: [localhost]
+
+TASK [Reset Kubernetes cluster - ignore errors] *******************************************************************************************************
+changed: [localhost]
+
+TASK [Delete kubeconfig file] *************************************************************************************************************************
+ok: [localhost]
+
+TASK [Remove /etc/kubernetes/resources directory] *****************************************************************************************************
+ok: [localhost]
+
+TASK [Remove docker.io/library/ubuntu:latest from containerd - ignore errors] *************************************************************************
+changed: [localhost]
+
+TASK [Remove /resources/nerdctl-bridge.conflist] ******************************************************************************************************
+changed: [localhost]
+
+TASK [Down nerdctl0 bridge - ignore errors] ***********************************************************************************************************
+changed: [localhost]
+
+TASK [Delete nerdctl0 bridge - ignore errors] *********************************************************************************************************
+changed: [localhost]
+
+PLAY [Container Runtimes] *****************************************************************************************************************************
+
+TASK [Gathering Facts] ********************************************************************************************************************************
+ok: [localhost]
+
+TASK [Check if nerdctl exists] ************************************************************************************************************************
+ok: [localhost]
+
+TASK [Install nerdctl if it doesn't exist] ************************************************************************************************************
+skipping: [localhost]
+
+TASK [Check if the CNI plugins exist] *****************************************************************************************************************
+ok: [localhost]
+
+TASK [Install CNI plugins if required] ****************************************************************************************************************
+skipping: [localhost]
+
+TASK [Check if nerdctl-bridge configuration file exists in /resources] ********************************************************************************
+ok: [localhost]
+
+TASK [Run nerdctl to auto-configure if a configuration doesn't exist in /resources - ignore errors] ***************************************************
+changed: [localhost]
+
+TASK [Check if nerdctl-bridge configuration file exists in /etc/cni/net.d] ****************************************************************************
+ok: [localhost]
+
+TASK [Move nerdctl-bridge configuration file from /etc/cni/net.d to /resources] ***********************************************************************
+changed: [localhost]
+
+PLAY [Installing Kubernetes] **************************************************************************************************************************
+root@control-plane:~# apt update
+Hit:1 http://archive.ubuntu.com/ubuntu jammy InRelease
+Get:2 http://security.ubuntu.com/ubuntu jammy-security InRelease [110 kB]
+Get:3 http://archive.ubuntu.com/ubuntu jammy-updates InRelease [119 kB]
+Hit:4 http://archive.ubuntu.com/ubuntu jammy-backports InRelease  
+Fetched 229 kB in 2s (98.4 kB/s)
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+65 packages can be upgraded. Run 'apt list --upgradable' to see them.
+root@control-plane:~# apt install -y htop
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+htop is already the newest version (3.0.5-7build2).
+0 upgraded, 0 newly installed, 0 to remove and 65 not upgraded.
+root@control-plane:~# which htop
+/usr/bin/htop
+root@control-plane:~# systemctl status containerd
+● containerd.service - containerd container runtime
+     Loaded: loaded (/etc/systemd/system/containerd.service; enabled; vendor preset: enabled)
+    Drop-In: /etc/systemd/system/containerd.service.d
+             └─00-nomodprobe.conf
+     Active: active (running) since Sun 2024-01-07 11:36:04 UTC; 7h ago
+       Docs: https://containerd.io
+   Main PID: 228 (containerd)
+      Tasks: 16
+     Memory: 110.3M
+     CGroup: /docker/ea06de7023f1274260cb74350d311eb6012652f49b3a5432a8399bf2f3fb9348/system.slice/containerd.service
+             └─228 /usr/local/bin/containerd
+
+Jan 07 14:47:26 control-plane containerd[228]: time="2024-01-07T14:47:26.681719681Z" level=error msg="failed to reload cni configuration after receivin
+g fs change event(\"/etc/cni/net.d/nerdctl-bridge.conflist\": RENAME)" error="cni config load failed: no network config found in /etc/cni/net.d: cni pl
+ugin not initialized: failed to load cni config"
+Jan 07 17:50:25 control-plane containerd[228]: time="2024-01-07T17:50:25.603823447Z" level=info msg="loading plugin \"io.containerd.event.v1.publisher\
+"..." runtime=io.containerd.runc.v2 type=io.containerd.event.v1
+Jan 07 17:50:25 control-plane containerd[228]: time="2024-01-07T17:50:25.604170097Z" level=info msg="loading plugin \"io.containerd.internal.v1.shutdow
+n\"..." runtime=io.containerd.runc.v2 type=io.containerd.internal.v1
+Jan 07 17:50:25 control-plane containerd[228]: time="2024-01-07T17:50:25.604185046Z" level=info msg="loading plugin \"io.containerd.ttrpc.v1.task\"..."
+ runtime=io.containerd.runc.v2 type=io.containerd.ttrpc.v1
+Jan 07 17:50:25 control-plane containerd[228]: time="2024-01-07T17:50:25.604868356Z" level=info msg="starting signal loop" namespace=default path=/run/
+containerd/io.containerd.runtime.v2.task/default/079a71c63c73a358a4f28d8b6272e71843412fb19fbc1d208e435b0aadaada76 pid=33918 runtime=io.containerd.runc.
+v2
+Jan 07 17:50:26 control-plane containerd[228]: time="2024-01-07T17:50:26.019892978Z" level=info msg="shim disconnected" id=079a71c63c73a358a4f28d8b6272
+e71843412fb19fbc1d208e435b0aadaada76
+Jan 07 17:50:26 control-plane containerd[228]: time="2024-01-07T17:50:26.020551281Z" level=warning msg="cleaning up after shim disconnected" id=079a71c
+63c73a358a4f28d8b6272e71843412fb19fbc1d208e435b0aadaada76 namespace=default
+Jan 07 17:50:26 control-plane containerd[228]: time="2024-01-07T17:50:26.020619822Z" level=info msg="cleaning up dead shim"
+Jan 07 17:50:26 control-plane containerd[228]: time="2024-01-07T17:50:26.027417120Z" level=warning msg="cleanup warnings time=\"2024-01-07T17:50:26Z\" 
+level=info msg=\"starting signal loop\" namespace=default pid=34064 runtime=io.containerd.runc.v2\n"
+Jan 07 17:50:26 control-plane containerd[228]: time="2024-01-07T17:50:26.374112082Z" level=error msg="failed to reload cni configuration after receivin
+g fs change event(\"/etc/cni/net.d/nerdctl-bridge.conflist\": RENAME)" error="cni config load failed: no network config found in /etc/cni/net.d: cni pl
+ugin not initialized: failed to load cni config"
+root@control-plane:~# 
+root@control-plane:~# which runc
+/usr/local/sbin/runc
+root@control-plane:~# which ctr
+/usr/local/bin/ctr
+root@control-plane:~# ctr images pull docker.io/library/ubuntu:latest
+docker.io/library/ubuntu:latest:                                                  resolved       |++++++++++++++++++++++++++++++++++++++| 
+index-sha256:6042500cf4b44023ea1894effe7890666b0c5c7871ed83a97c36c76ae560bb9b:    done           |++++++++++++++++++++++++++++++++++++++| 
+manifest-sha256:bbf3d1baa208b7649d1d0264ef7d522e1dc0deeeaaf6085bf8e4618867f03494: done           |++++++++++++++++++++++++++++++++++++++| 
+layer-sha256:a486411936734b0d1d201c8a0ed8e9d449a64d5033fdc33411ec95bc26460efb:    done           |++++++++++++++++++++++++++++++++++++++| 
+config-sha256:174c8c134b2a94b5bb0b37d9a2b6ba0663d82d23ebf62bd51f74a2fd457333da:   done           |++++++++++++++++++++++++++++++++++++++| 
+elapsed: 5.5 s                                                                    total:  27.0 M (4.9 MiB/s)                                       
+unpacking linux/amd64 sha256:6042500cf4b44023ea1894effe7890666b0c5c7871ed83a97c36c76ae560bb9b...
+done: 935.230022ms
+root@control-plane:~# ctr run -t -d docker.io/library/ubuntu:latest quirky
+root@control-plane:~# ctr container list
+CONTAINER    IMAGE                              RUNTIME                  
+quirky       docker.io/library/ubuntu:latest    io.containerd.runc.v2    
+root@control-plane:~# ctr task list
+TASK      PID      STATUS    
+quirky    38827    RUNNING
+root@control-plane:~# ps -ef --forest
+UID          PID    PPID  C STIME TTY          TIME CMD
+root           1       0  0 11:36 ?        00:00:30 /sbin/init
+root         213       1  0 11:36 ?        00:00:11 /lib/systemd/systemd-journald
+root         228       1  0 11:36 ?        00:00:42 /usr/local/bin/containerd
+message+     229       1  0 11:36 ?        00:00:03 @dbus-daemon --system --address=systemd: --nofork --nopidfile --systemd-activation --syslog-only
+root         231       1  0 11:36 ?        00:00:01 /lib/systemd/systemd-logind
+root         233       1  0 11:36 ?        00:00:01 /bin/ttyd -W -t titleFixed 'control-plane' login
+root       15553     233  0 14:36 pts/0    00:00:00  \_ login
+root       15585   15553  0 14:36 pts/0    00:00:00      \_ -bash
+root       38856   15585  0 18:42 pts/0    00:00:00          \_ ps -ef --forest
+root         241       1  0 11:36 ?        00:00:00 sshd: /usr/sbin/sshd -D [listener] 0 of 10-100 startups
+root       15579       1  0 14:36 ?        00:00:00 /lib/systemd/systemd --user
+root       15580   15579  0 14:36 ?        00:00:00  \_ (sd-pam)
+root       38806       1  0 18:42 ?        00:00:00 /usr/local/bin/containerd-shim-runc-v2 -namespace default -id quirky -address /run/containerd/conta
+root       38827   38806  0 18:42 pts/0    00:00:00  \_ /bin/bash
+root@control-plane:~# ctr task attach quirky
+root@control-plane:/# ps
+    PID TTY          TIME CMD
+      1 pts/0    00:00:00 bash
+      9 pts/0    00:00:00 ps
+root@control-plane:/# apt update
+Ign:1 http://archive.ubuntu.com/ubuntu jammy InRelease
+Ign:2 http://security.ubuntu.com/ubuntu jammy-security InRelease
+Ign:3 http://archive.ubuntu.com/ubuntu jammy-updates InRelease
+Ign:4 http://archive.ubuntu.com/ubuntu jammy-backports InRelease
+Ign:1 http://archive.ubuntu.com/ubuntu jammy InRelease
+Ign:2 http://security.ubuntu.com/ubuntu jammy-security InRelease
+Ign:3 http://archive.ubuntu.com/ubuntu jammy-updates InRelease
+Ign:4 http://archive.ubuntu.com/ubuntu jammy-backports InRelease
+Ign:1 http://archive.ubuntu.com/ubuntu jammy InRelease
+Ign:2 http://security.ubuntu.com/ubuntu jammy-security InRelease
+Ign:3 http://archive.ubuntu.com/ubuntu jammy-updates InRelease
+Ign:4 http://archive.ubuntu.com/ubuntu jammy-backports InRelease
+Err:1 http://archive.ubuntu.com/ubuntu jammy InRelease
+  Temporary failure resolving 'archive.ubuntu.com'
+Err:2 http://security.ubuntu.com/ubuntu jammy-security InRelease
+  Temporary failure resolving 'security.ubuntu.com'
+Err:3 http://archive.ubuntu.com/ubuntu jammy-updates InRelease
+  Temporary failure resolving 'archive.ubuntu.com'
+Err:4 http://archive.ubuntu.com/ubuntu jammy-backports InRelease
+  Temporary failure resolving 'archive.ubuntu.com'
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+All packages are up to date.
+W: Failed to fetch http://archive.ubuntu.com/ubuntu/dists/jammy/InRelease  Temporary failure resolving 'archive.ubuntu.com'
+W: Failed to fetch http://archive.ubuntu.com/ubuntu/dists/jammy-updates/InRelease  Temporary failure resolving 'archive.ubuntu.com'
+W: Failed to fetch http://archive.ubuntu.com/ubuntu/dists/jammy-backports/InRelease  Temporary failure resolving 'archive.ubuntu.com'
+W: Failed to fetch http://security.ubuntu.com/ubuntu/dists/jammy-security/InRelease  Temporary failure resolving 'security.ubuntu.com'
+W: Some index files failed to download. They have been ignored, or old ones used instead.
+root@control-plane:/# exit
+exit
+root@control-plane:~# ctr task ls
+root@control-plane:~# /resources/catchup reset
+Resetting and re-running previous steps, script called with reset - executing ansible with tag reset ... 
+
+PLAY [Reset Kubernetes and Resources] *****************************************************************************************************************
+
+TASK [Gathering Facts] ********************************************************************************************************************************
+ok: [localhost]
+
+TASK [Reset Kubernetes cluster - ignore errors] *******************************************************************************************************
+changed: [localhost]
+
+TASK [Delete kubeconfig file] *************************************************************************************************************************
+ok: [localhost]
+
+TASK [Remove /etc/kubernetes/resources directory] *****************************************************************************************************
+ok: [localhost]
+
+TASK [Remove docker.io/library/ubuntu:latest from containerd - ignore errors] *************************************************************************
+changed: [localhost]
+
+TASK [Remove /resources/nerdctl-bridge.conflist] ******************************************************************************************************
+changed: [localhost]
+
+TASK [Down nerdctl0 bridge - ignore errors] ***********************************************************************************************************
+changed: [localhost]
+
+TASK [Delete nerdctl0 bridge - ignore errors] *********************************************************************************************************
+changed: [localhost]
+
+PLAY [Container Runtimes] *****************************************************************************************************************************
+
+PLAY [Installing Kubernetes] **************************************************************************************************************************
+root@control-plane:~# apt update
+Hit:1 http://security.ubuntu.com/ubuntu jammy-security InRelease
+Hit:2 http://archive.ubuntu.com/ubuntu jammy InRelease
+Hit:3 http://archive.ubuntu.com/ubuntu jammy-updates InRelease
+Hit:4 http://archive.ubuntu.com/ubuntu jammy-backports InRelease
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+65 packages can be upgraded. Run 'apt list --upgradable' to see them.
+root@control-plane:~# apt install -y htop
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+htop is already the newest version (3.0.5-7build2).
+0 upgraded, 0 newly installed, 0 to remove and 65 not upgraded.
+root@control-plane:~# which htop
+/usr/bin/htop
+root@control-plane:~# systemctl status containerd
+● containerd.service - containerd container runtime
+     Loaded: loaded (/etc/systemd/system/containerd.service; enabled; vendor preset: enabled)
+    Drop-In: /etc/systemd/system/containerd.service.d
+             └─00-nomodprobe.conf
+     Active: active (running) since Sun 2024-01-07 11:36:04 UTC; 7h ago
+       Docs: https://containerd.io
+   Main PID: 228 (containerd)
+      Tasks: 16
+     Memory: 120.3M
+     CGroup: /docker/ea06de7023f1274260cb74350d311eb6012652f49b3a5432a8399bf2f3fb9348/system.slice/containerd.service
+             └─228 /usr/local/bin/containerd
+
+Jan 07 17:50:26 control-plane containerd[228]: time="2024-01-07T17:50:26.027417120Z" level=warning msg="cleanup warnings time=\"2024-01-07T17:50:26Z\" 
+level=info msg=\"starting signal loop\" namespace=default pid=34064 runtime=io.containerd.runc.v2\n"
+Jan 07 17:50:26 control-plane containerd[228]: time="2024-01-07T17:50:26.374112082Z" level=error msg="failed to reload cni configuration after receivin
+g fs change event(\"/etc/cni/net.d/nerdctl-bridge.conflist\": RENAME)" error="cni config load failed: no network config found in /etc/cni/net.d: cni pl
+ugin not initialized: failed to load cni config"
+Jan 07 18:42:16 control-plane containerd[228]: time="2024-01-07T18:42:16.293308137Z" level=info msg="loading plugin \"io.containerd.event.v1.publisher\
+"..." runtime=io.containerd.runc.v2 type=io.containerd.event.v1
+Jan 07 18:42:16 control-plane containerd[228]: time="2024-01-07T18:42:16.293669626Z" level=info msg="loading plugin \"io.containerd.internal.v1.shutdow
+n\"..." runtime=io.containerd.runc.v2 type=io.containerd.internal.v1
+Jan 07 18:42:16 control-plane containerd[228]: time="2024-01-07T18:42:16.293682771Z" level=info msg="loading plugin \"io.containerd.ttrpc.v1.task\"..."
+ runtime=io.containerd.runc.v2 type=io.containerd.ttrpc.v1
+Jan 07 18:42:16 control-plane containerd[228]: time="2024-01-07T18:42:16.294426035Z" level=info msg="starting signal loop" namespace=default path=/run/
+containerd/io.containerd.runtime.v2.task/default/quirky pid=38806 runtime=io.containerd.runc.v2
+Jan 07 18:42:47 control-plane containerd[228]: time="2024-01-07T18:42:47.283518236Z" level=info msg="shim disconnected" id=quirky
+Jan 07 18:42:47 control-plane containerd[228]: time="2024-01-07T18:42:47.284002849Z" level=warning msg="cleaning up after shim disconnected" id=quirky 
+namespace=default
+Jan 07 18:42:47 control-plane containerd[228]: time="2024-01-07T18:42:47.284072832Z" level=info msg="cleaning up dead shim"
+Jan 07 18:42:47 control-plane containerd[228]: time="2024-01-07T18:42:47.291144884Z" level=warning msg="cleanup warnings time=\"2024-01-07T18:42:47Z\" 
+level=info msg=\"starting signal loop\" namespace=default pid=38925 runtime=io.containerd.runc.v2\n"
+root@control-plane:~# which runc
+/usr/local/sbin/runc
+root@control-plane:~# which ctr
+/usr/local/bin/ctr
+root@control-plane:~# ctr images pull docker.io/library/ubuntu:latest
+docker.io/library/ubuntu:latest:                                                  resolved       |++++++++++++++++++++++++++++++++++++++| 
+index-sha256:6042500cf4b44023ea1894effe7890666b0c5c7871ed83a97c36c76ae560bb9b:    done           |++++++++++++++++++++++++++++++++++++++| 
+manifest-sha256:bbf3d1baa208b7649d1d0264ef7d522e1dc0deeeaaf6085bf8e4618867f03494: done           |++++++++++++++++++++++++++++++++++++++| 
+layer-sha256:a486411936734b0d1d201c8a0ed8e9d449a64d5033fdc33411ec95bc26460efb:    done           |++++++++++++++++++++++++++++++++++++++| 
+config-sha256:174c8c134b2a94b5bb0b37d9a2b6ba0663d82d23ebf62bd51f74a2fd457333da:   done           |++++++++++++++++++++++++++++++++++++++| 
+elapsed: 5.5 s                                                                    total:  28.0 M (5.1 MiB/s)                                       
+unpacking linux/amd64 sha256:6042500cf4b44023ea1894effe7890666b0c5c7871ed83a97c36c76ae560bb9b...
+done: 898.477453ms
+root@control-plane:~# ctr run -t -d docker.io/library/ubuntu:latest quirky
+root@control-plane:~# ctr container list
+CONTAINER    IMAGE                              RUNTIME                  
+quirky       docker.io/library/ubuntu:latest    io.containerd.runc.v2    
+root@control-plane:~# ctr task list
+TASK      PID      STATUS    
+quirky    39687    RUNNING
+root@control-plane:~# ps -ef --forest
+UID          PID    PPID  C STIME TTY          TIME CMD
+root           1       0  0 11:36 ?        00:00:30 /sbin/init
+root         213       1  0 11:36 ?        00:00:11 /lib/systemd/systemd-journald
+root         228       1  0 11:36 ?        00:00:44 /usr/local/bin/containerd
+message+     229       1  0 11:36 ?        00:00:03 @dbus-daemon --system --address=systemd: --nofork --nopidfile --systemd-activation --syslog-only
+root         231       1  0 11:36 ?        00:00:01 /lib/systemd/systemd-logind
+root         233       1  0 11:36 ?        00:00:01 /bin/ttyd -W -t titleFixed 'control-plane' login
+root       15553     233  0 14:36 pts/0    00:00:00  \_ login
+root       15585   15553  0 14:36 pts/0    00:00:00      \_ -bash
+root       39713   15585  0 18:44 pts/0    00:00:00          \_ ps -ef --forest
+root         241       1  0 11:36 ?        00:00:00 sshd: /usr/sbin/sshd -D [listener] 0 of 10-100 startups
+root       15579       1  0 14:36 ?        00:00:00 /lib/systemd/systemd --user
+root       15580   15579  0 14:36 ?        00:00:00  \_ (sd-pam)
+root       39665       1  0 18:44 ?        00:00:00 /usr/local/bin/containerd-shim-runc-v2 -namespace default -id quirky -address /run/containerd/conta
+root       39687   39665  0 18:44 pts/0    00:00:00  \_ /bin/bash
+root@control-plane:~# ctr task attach quirky
+root@control-plane:/# ps
+    PID TTY          TIME CMD
+      1 pts/0    00:00:00 bash
+      9 pts/0    00:00:00 ps
+root@control-plane:/# ps
+    PID TTY          TIME CMD
+      1 pts/0    00:00:00 bash
+     10 pts/0    00:00:00 ps
+root@control-plane:/# apt update
+Ign:1 http://archive.ubuntu.com/ubuntu jammy InRelease
+Ign:2 http://security.ubuntu.com/ubuntu jammy-security InRelease
+Ign:3 http://archive.ubuntu.com/ubuntu jammy-updates InRelease
+Ign:4 http://archive.ubuntu.com/ubuntu jammy-backports InRelease
+Ign:1 http://archive.ubuntu.com/ubuntu jammy InRelease
+Ign:2 http://security.ubuntu.com/ubuntu jammy-security InRelease
+Ign:3 http://archive.ubuntu.com/ubuntu jammy-updates InRelease
+Ign:4 http://archive.ubuntu.com/ubuntu jammy-backports InRelease
+Ign:1 http://archive.ubuntu.com/ubuntu jammy InRelease
+Ign:2 http://security.ubuntu.com/ubuntu jammy-security InRelease
+Ign:3 http://archive.ubuntu.com/ubuntu jammy-updates InRelease
+Ign:4 http://archive.ubuntu.com/ubuntu jammy-backports InRelease
+Err:1 http://archive.ubuntu.com/ubuntu jammy InRelease
+  Temporary failure resolving 'archive.ubuntu.com'
+Err:2 http://security.ubuntu.com/ubuntu jammy-security InRelease
+  Temporary failure resolving 'security.ubuntu.com'
+Err:3 http://archive.ubuntu.com/ubuntu jammy-updates InRelease
+  Temporary failure resolving 'archive.ubuntu.com'
+Err:4 http://archive.ubuntu.com/ubuntu jammy-backports InRelease
+  Temporary failure resolving 'archive.ubuntu.com'
+Reading package lists... Done        
+Building dependency tree... Done
+Reading state information... Done
+All packages are up to date.
+W: Failed to fetch http://archive.ubuntu.com/ubuntu/dists/jammy/InRelease  Temporary failure resolving 'archive.ubuntu.com'
+W: Failed to fetch http://archive.ubuntu.com/ubuntu/dists/jammy-updates/InRelease  Temporary failure resolving 'archive.ubuntu.com'
+W: Failed to fetch http://archive.ubuntu.com/ubuntu/dists/jammy-backports/InRelease  Temporary failure resolving 'archive.ubuntu.com'
+W: Failed to fetch http://security.ubuntu.com/ubuntu/dists/jammy-security/InRelease  Temporary failure resolving 'security.ubuntu.com'
+W: Some index files failed to download. They have been ignored, or old ones used instead.
+root@control-plane:/# exit
+exit
+root@control-plane:~# ctr task ls
+TASK    PID    STATUS    
+root@control-plane:~# ctr container list
+CONTAINER    IMAGE                              RUNTIME                  
+quirky       docker.io/library/ubuntu:latest    io.containerd.runc.v2    
+root@control-plane:~# ctr container delete quirky
+root@control-plane:~# tar -xzvf /resources/nerdctl-1.1.0-linux.tar.gz --directory /usr/local/bin nerdctl
+nerdctl
+root@control-plane:~# tar -xzvf /resources/cni-plugins-linux-v1.2.0.tgz -C /opt/cni/bin
+./
+./loopback
+./bandwidth
+./ptp
+./vlan
+./host-device
+./tuning
+./vrf
+./sbr
+./dhcp
+./static
+./firewall
+./macvlan
+./dummy
+./bridge
+./ipvlan
+./portmap
+./host-local
+root@control-plane:~# ls -altr /etc/cni/net.d
+total 12
+drwx------ 1 root root 4096 Dec 20  2022 ..
+drwx------ 1 root root 4096 Jan  7 17:50 .
+root@control-plane:~# nerdctl run --rm -it ubuntu bash
+root@c6a01dd78a1c:/# ps -ef
+UID          PID    PPID  C STIME TTY          TIME CMD
+root           1       0  0 18:45 pts/0    00:00:00 bash
+root           9       1  0 18:45 pts/0    00:00:00 ps -ef
+root@c6a01dd78a1c:/# apt update
+Get:1 http://archive.ubuntu.com/ubuntu jammy InRelease [270 kB]
+Get:2 http://security.ubuntu.com/ubuntu jammy-security InRelease [110 kB]
+Get:3 http://archive.ubuntu.com/ubuntu jammy-updates InRelease [119 kB]
+Get:4 http://security.ubuntu.com/ubuntu jammy-security/main amd64 Packages [1332 kB]
+Get:5 http://archive.ubuntu.com/ubuntu jammy-backports InRelease [109 kB]
+Get:6 http://security.ubuntu.com/ubuntu jammy-security/restricted amd64 Packages [1582 kB]
+Get:7 http://archive.ubuntu.com/ubuntu jammy/universe amd64 Packages [17.5 MB]
+Get:8 http://security.ubuntu.com/ubuntu jammy-security/multiverse amd64 Packages [44.0 kB]   
+Get:9 http://security.ubuntu.com/ubuntu jammy-security/universe amd64 Packages [1047 kB]     
+Get:10 http://archive.ubuntu.com/ubuntu jammy/multiverse amd64 Packages [266 kB]                                                                      
+Get:11 http://archive.ubuntu.com/ubuntu jammy/restricted amd64 Packages [164 kB]                                                                      
+Get:12 http://archive.ubuntu.com/ubuntu jammy/main amd64 Packages [1792 kB]                                                                           
+Get:13 http://archive.ubuntu.com/ubuntu jammy-updates/multiverse amd64 Packages [49.8 kB]                                                             
+Get:14 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 Packages [1606 kB]                                                                   
+Get:15 http://archive.ubuntu.com/ubuntu jammy-updates/restricted amd64 Packages [1611 kB]                                                             
+Get:16 http://archive.ubuntu.com/ubuntu jammy-updates/universe amd64 Packages [1307 kB]                                                               
+Get:17 http://archive.ubuntu.com/ubuntu jammy-backports/universe amd64 Packages [28.1 kB]                                                             
+Get:18 http://archive.ubuntu.com/ubuntu jammy-backports/main amd64 Packages [50.4 kB]                                                                 
+Fetched 29.0 MB in 16s (1765 kB/s)                                                                                                                    
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+All packages are up to date.
+root@c6a01dd78a1c:/# apt install -y iproute2
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+The following additional packages will be installed:
+  libatm1 libbpf0 libbsd0 libcap2-bin libelf1 libmd0 libmnl0 libpam-cap libxtables12
+Suggested packages:
+  iproute2-doc
+The following NEW packages will be installed:
+  iproute2 libatm1 libbpf0 libbsd0 libcap2-bin libelf1 libmd0 libmnl0 libpam-cap libxtables12
+0 upgraded, 10 newly installed, 0 to remove and 0 not upgraded.
+Need to get 1430 kB of archives.
+After this operation, 4151 kB of additional disk space will be used.
+Get:1 http://archive.ubuntu.com/ubuntu jammy/main amd64 libelf1 amd64 0.186-1build1 [51.0 kB]
+Get:2 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 libbpf0 amd64 1:0.5.0-1ubuntu22.04.1 [140 kB]
+Get:3 http://archive.ubuntu.com/ubuntu jammy/main amd64 libmd0 amd64 1.0.4-1build1 [23.0 kB]
+Get:4 http://archive.ubuntu.com/ubuntu jammy/main amd64 libbsd0 amd64 0.11.5-1 [44.8 kB]
+Get:5 http://archive.ubuntu.com/ubuntu jammy/main amd64 libmnl0 amd64 1.0.4-3build2 [13.2 kB]
+Get:6 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 libxtables12 amd64 1.8.7-1ubuntu5.1 [31.2 kB]
+Get:7 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 libcap2-bin amd64 1:2.44-1ubuntu0.22.04.1 [26.0 kB]
+Get:8 http://archive.ubuntu.com/ubuntu jammy/main amd64 iproute2 amd64 5.15.0-1ubuntu2 [1070 kB]
+Get:9 http://archive.ubuntu.com/ubuntu jammy/main amd64 libatm1 amd64 1:2.5.1-4build2 [22.8 kB]
+Get:10 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 libpam-cap amd64 1:2.44-1ubuntu0.22.04.1 [7928 B]
+Fetched 1430 kB in 4s (330 kB/s)      
+debconf: delaying package configuration, since apt-utils is not installed
+Selecting previously unselected package libelf1:amd64.
+(Reading database ... 4393 files and directories currently installed.)
+Preparing to unpack .../0-libelf1_0.186-1build1_amd64.deb ...
+Unpacking libelf1:amd64 (0.186-1build1) ...
+Selecting previously unselected package libbpf0:amd64.
+Preparing to unpack .../1-libbpf0_1%3a0.5.0-1ubuntu22.04.1_amd64.deb ...
+Unpacking libbpf0:amd64 (1:0.5.0-1ubuntu22.04.1) ...
+Selecting previously unselected package libmd0:amd64.
+Preparing to unpack .../2-libmd0_1.0.4-1build1_amd64.deb ...
+Unpacking libmd0:amd64 (1.0.4-1build1) ...
+Selecting previously unselected package libbsd0:amd64.
+Preparing to unpack .../3-libbsd0_0.11.5-1_amd64.deb ...
+Unpacking libbsd0:amd64 (0.11.5-1) ...
+Selecting previously unselected package libmnl0:amd64.
+Preparing to unpack .../4-libmnl0_1.0.4-3build2_amd64.deb ...
+Unpacking libmnl0:amd64 (1.0.4-3build2) ...
+Selecting previously unselected package libxtables12:amd64.
+Preparing to unpack .../5-libxtables12_1.8.7-1ubuntu5.1_amd64.deb ...
+Unpacking libxtables12:amd64 (1.8.7-1ubuntu5.1) ...
+Selecting previously unselected package libcap2-bin.
+Preparing to unpack .../6-libcap2-bin_1%3a2.44-1ubuntu0.22.04.1_amd64.deb ...
+Unpacking libcap2-bin (1:2.44-1ubuntu0.22.04.1) ...
+Selecting previously unselected package iproute2.
+Preparing to unpack .../7-iproute2_5.15.0-1ubuntu2_amd64.deb ...
+Unpacking iproute2 (5.15.0-1ubuntu2) ...
+Selecting previously unselected package libatm1:amd64.
+Preparing to unpack .../8-libatm1_1%3a2.5.1-4build2_amd64.deb ...
+Unpacking libatm1:amd64 (1:2.5.1-4build2) ...
+Selecting previously unselected package libpam-cap:amd64.
+Preparing to unpack .../9-libpam-cap_1%3a2.44-1ubuntu0.22.04.1_amd64.deb ...
+Unpacking libpam-cap:amd64 (1:2.44-1ubuntu0.22.04.1) ...
+Setting up libatm1:amd64 (1:2.5.1-4build2) ...
+Setting up libcap2-bin (1:2.44-1ubuntu0.22.04.1) ...
+Setting up libmnl0:amd64 (1.0.4-3build2) ...
+Setting up libxtables12:amd64 (1.8.7-1ubuntu5.1) ...
+Setting up libmd0:amd64 (1.0.4-1build1) ...
+Setting up libbsd0:amd64 (0.11.5-1) ...
+Setting up libelf1:amd64 (0.186-1build1) ...
+Setting up libpam-cap:amd64 (1:2.44-1ubuntu0.22.04.1) ...
+debconf: unable to initialize frontend: Dialog
+debconf: (No usable dialog-like program is installed, so the dialog based frontend cannot be used. at /usr/share/perl5/Debconf/FrontEnd/Dialog.pm line 78.)
+debconf: falling back to frontend: Readline
+debconf: unable to initialize frontend: Readline
+debconf: (Can't locate Term/ReadLine.pm in @INC (you may need to install the Term::ReadLine module) (@INC contains: /etc/perl /usr/local/lib/x86_64-linux-gnu/perl/5.34.0 /usr/local/share/perl/5.34.0 /usr/lib/x86_64-linux-gnu/perl5/5.34 /usr/share/perl5 /usr/lib/x86_64-linux-gnu/perl-base /usr/lib/x86_64-linux-gnu/perl/5.34 /usr/share/perl/5.34 /usr/local/lib/site_perl) at /usr/share/perl5/Debconf/FrontEnd/Readline.pm line 7.)
+debconf: falling back to frontend: Teletype
+Setting up libbpf0:amd64 (1:0.5.0-1ubuntu22.04.1) ...
+Setting up iproute2 (5.15.0-1ubuntu2) ...
+debconf: unable to initialize frontend: Dialog
+debconf: (No usable dialog-like program is installed, so the dialog based frontend cannot be used. at /usr/share/perl5/Debconf/FrontEnd/Dialog.pm line 78.)
+debconf: falling back to frontend: Readline
+debconf: unable to initialize frontend: Readline
+debconf: (Can't locate Term/ReadLine.pm in @INC (you may need to install the Term::ReadLine module) (@INC contains: /etc/perl /usr/local/lib/x86_64-linux-gnu/perl/5.34.0 /usr/local/share/perl/5.34.0 /usr/lib/x86_64-linux-gnu/perl5/5.34 /usr/share/perl5 /usr/lib/x86_64-linux-gnu/perl-base /usr/lib/x86_64-linux-gnu/perl/5.34 /usr/share/perl/5.34 /usr/local/lib/site_perl) at /usr/share/perl5/Debconf/FrontEnd/Readline.pm line 7.)
+debconf: falling back to frontend: Teletype
+Processing triggers for libc-bin (2.35-0ubuntu3.5) ...
+root@c6a01dd78a1c:/# ip addr
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host 
+       valid_lft forever preferred_lft forever
+2: tunl0@NONE: <NOARP> mtu 1480 qdisc noop state DOWN group default qlen 1000
+    link/ipip 0.0.0.0 brd 0.0.0.0
+3: sit0@NONE: <NOARP> mtu 1480 qdisc noop state DOWN group default qlen 1000
+    link/sit 0.0.0.0 brd 0.0.0.0
+4: eth0@if9: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP group default 
+    link/ether 22:6a:42:74:14:ff brd ff:ff:ff:ff:ff:ff link-netnsid 0
+    inet 10.4.0.4/24 brd 10.4.0.255 scope global eth0
+       valid_lft forever preferred_lft forever
+    inet6 fe80::206a:42ff:fe74:14ff/64 scope link 
+       valid_lft forever preferred_lft forever
+root@c6a01dd78a1c:/# exit
+exit
+root@control-plane:~# cat /etc/cni/net.d/nerdctl-bridge.conflist
+{
+  "cniVersion": "1.0.0",
+  "name": "bridge",
+  "nerdctlID": "17f29b073143d8cd97b5bbe492bdeffec1c5fee55cc1fe2112c8b9335f8b6121",
+  "nerdctlLabels": {
+    "nerdctl/default-network": "true"
+  },
+  "plugins": [
+    {
+      "type": "bridge",
+      "bridge": "nerdctl0",
+      "isGateway": true,
+      "ipMasq": true,
+      "hairpinMode": true,
+      "ipam": {
+        "ranges": [
+          [
+            {
+              "gateway": "10.4.0.1",
+              "subnet": "10.4.0.0/24"
+            }
+          ]
+        ],
+        "routes": [
+          {
+            "dst": "0.0.0.0/0"
+          }
+        ],
+        "type": "host-local"
+      }
+    },
+    {
+      "type": "portmap",
+      "capabilities": {
+        "portMappings": true
+      }
+    },
+    {
+      "type": "firewall",
+      "ingressPolicy": "same-bridge"
+    },
+    {
+      "type": "tuning"
+    }
+  ]
+}root@control-plane:~#mv /etc/cni/net.d/nerdctl-bridge.conflist /resourcess
+root@control-plane:~# kubeadm init --pod-network-cidr=10.10.0.0/16 --kubernetes-version=1.26.0
+[init] Using Kubernetes version: v1.26.0
+[preflight] Running pre-flight checks
+        [WARNING Swap]: swap is enabled; production deployments should disable swap unless testing the NodeSwap feature gate of the kubelet
+[preflight] Pulling images required for setting up a Kubernetes cluster
+[preflight] This might take a minute or two, depending on the speed of your internet connection
+[preflight] You can also perform this action in beforehand using 'kubeadm config images pull'
+[certs] Using certificateDir folder "/etc/kubernetes/pki"
+[certs] Generating "ca" certificate and key
+[certs] Generating "apiserver" certificate and key
+[certs] apiserver serving cert is signed for DNS names [control-plane kubernetes kubernetes.default kubernetes.default.svc kubernetes.default.svc.cluster.local] and IPs [10.96.0.1 172.18.0.3]
+[certs] Generating "apiserver-kubelet-client" certificate and key
+[certs] Generating "front-proxy-ca" certificate and key
+[certs] Generating "front-proxy-client" certificate and key
+[certs] Generating "etcd/ca" certificate and key
+[certs] Generating "etcd/server" certificate and key
+[certs] etcd/server serving cert is signed for DNS names [control-plane localhost] and IPs [172.18.0.3 127.0.0.1 ::1]
+[certs] Generating "etcd/peer" certificate and key
+[certs] etcd/peer serving cert is signed for DNS names [control-plane localhost] and IPs [172.18.0.3 127.0.0.1 ::1]
+[certs] Generating "etcd/healthcheck-client" certificate and key
+[certs] Generating "apiserver-etcd-client" certificate and key
+[certs] Generating "sa" key and public key
+[kubeconfig] Using kubeconfig folder "/etc/kubernetes"
+[kubeconfig] Writing "admin.conf" kubeconfig file
+[kubeconfig] Writing "kubelet.conf" kubeconfig file
+[kubeconfig] Writing "controller-manager.conf" kubeconfig file
+[kubeconfig] Writing "scheduler.conf" kubeconfig file
+[kubelet-start] Writing kubelet environment file with flags to file "/var/lib/kubelet/kubeadm-flags.env"
+[kubelet-start] Writing kubelet configuration to file "/var/lib/kubelet/config.yaml"
+[kubelet-start] Starting the kubelet
+[control-plane] Using manifest folder "/etc/kubernetes/manifests"
+[control-plane] Creating static Pod manifest for "kube-apiserver"
+[control-plane] Creating static Pod manifest for "kube-controller-manager"
+[control-plane] Creating static Pod manifest for "kube-scheduler"
+[etcd] Creating static Pod manifest for local etcd in "/etc/kubernetes/manifests"
+[wait-control-plane] Waiting for the kubelet to boot up the control plane as static Pods from directory "/etc/kubernetes/manifests". This can take up to 4m0s
+[apiclient] All control plane components are healthy after 7.008432 seconds
+[upload-config] Storing the configuration used in ConfigMap "kubeadm-config" in the "kube-system" Namespace
+[kubelet] Creating a ConfigMap "kubelet-config" in namespace kube-system with the configuration for the kubelets in the cluster
+[upload-certs] Skipping phase. Please see --upload-certs
+[mark-control-plane] Marking the node control-plane as control-plane by adding the labels: [node-role.kubernetes.io/control-plane node.kubernetes.io/exclude-from-external-load-balancers]
+[mark-control-plane] Marking the node control-plane as control-plane by adding the taints [node-role.kubernetes.io/control-plane:NoSchedule]
+[bootstrap-token] Using token: s6g8tu.3rx234yy92meuvrc
+[bootstrap-token] Configuring bootstrap tokens, cluster-info ConfigMap, RBAC Roles
+[bootstrap-token] Configured RBAC rules to allow Node Bootstrap tokens to get nodes
+[bootstrap-token] Configured RBAC rules to allow Node Bootstrap tokens to post CSRs in order for nodes to get long term certificate credentials
+[bootstrap-token] Configured RBAC rules to allow the csrapprover controller automatically approve CSRs from a Node Bootstrap Token
+[bootstrap-token] Configured RBAC rules to allow certificate rotation for all node client certificates in the cluster
+[bootstrap-token] Creating the "cluster-info" ConfigMap in the "kube-public" namespace
+[kubelet-finalize] Updating "/etc/kubernetes/kubelet.conf" to point to a rotatable kubelet client certificate and key
+[addons] Applied essential addon: CoreDNS
+[addons] Applied essential addon: kube-proxy
+
+Your Kubernetes control-plane has initialized successfully!
+
+To start using your cluster, you need to run the following as a regular user:
+
+  mkdir -p $HOME/.kube
+  sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+  sudo chown $(id -u):$(id -g) $HOME/.kube/config
+
+Alternatively, if you are the root user, you can run:
+
+  export KUBECONFIG=/etc/kubernetes/admin.conf
+
+You should now deploy a pod network to the cluster.
+Run "kubectl apply -f [podnetwork].yaml" with one of the options listed at:
+  https://kubernetes.io/docs/concepts/cluster-administration/addons/
+
+Then you can join any number of worker nodes by running the following on each as root:
+
+kubeadm join 172.18.0.3:6443 --token s6g8tu.3rx234yy92meuvrc \
+        --discovery-token-ca-cert-hash sha256:194117a16952377746aee4e2b833d3f5d92a3ae003b61e1d33642f14772ebdfb 
+root@control-plane:~# ^C
+root@control-plane:~# ^C
+root@control-plane:~# ^C
+root@control-plane:~# mkdir -p $HOME/.kube; sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config; sudo chown $(id -u):$(id -g) $HOME/.kube/config
+root@control-plane:~# kubectl get nodes
+NAME            STATUS     ROLES           AGE   VERSION
+control-plane   NotReady   control-plane   82s   v1.26.0
+root@control-plane:~# cat /resources/cni/10-bridge.conf
+{
+    "cniVersion": "0.3.1",
+    "name": "mynet",
+    "type": "bridge",
+    "bridge": "mynet0",
+    "isDefaultGateway": true,
+    "forceAddress": false,
+    "ipMasq": true,
+    "hairpinMode": true,
+    "ipam": {
+        "type": "host-local",
+        "subnet": "10.10.0.0/16"
+    }
+}
+root@control-plane:~# sleep 3 && cp /resources/cni/10-bridge.conf /etc/cni/net.d & watch kubectl get nodes -o wide
+[1] 41751
+[1]+  Done                    sleep 3 && cp /resources/cni/10-bridge.conf /etc/cni/net.d
+root@control-plane:~# ip addr
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+2: tunl0@NONE: <NOARP> mtu 1480 qdisc noop state DOWN group default qlen 1000
+    link/ipip 0.0.0.0 brd 0.0.0.0
+3: sit0@NONE: <NOARP> mtu 1480 qdisc noop state DOWN group default qlen 1000
+    link/sit 0.0.0.0 brd 0.0.0.0
+8: nerdctl0: <NO-CARRIER,BROADCAST,MULTICAST,UP> mtu 1500 qdisc noqueue state DOWN group default qlen 1000
+    link/ether f2:8c:ea:5a:27:8e brd ff:ff:ff:ff:ff:ff
+    inet 10.4.0.1/24 brd 10.4.0.255 scope global nerdctl0
+       valid_lft forever preferred_lft forever
+10: eth0@if11: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP group default 
+    link/ether 02:42:ac:12:00:03 brd ff:ff:ff:ff:ff:ff link-netnsid 0
+    inet 172.18.0.3/16 brd 172.18.255.255 scope global eth0
+       valid_lft forever preferred_lft forever
+11: mynet0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP group default qlen 1000
+    link/ether 8a:47:30:ff:4f:63 brd ff:ff:ff:ff:ff:ff
+    inet 10.10.0.1/16 brd 10.10.255.255 scope global mynet0
+       valid_lft forever preferred_lft forever
+12: veth8fd73fc6@if4: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue master mynet0 state UP group default 
+    link/ether 0e:38:0c:6f:d2:9a brd ff:ff:ff:ff:ff:ff link-netns cni-5254ad39-4855-9ce4-d062-52da18dcb465
+13: vethd241d6d4@if4: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue master mynet0 state UP group default 
+    link/ether f6:38:b8:f5:a8:dc brd ff:ff:ff:ff:ff:ff link-netns cni-1b7e56ad-4f71-7133-b165-6974451dd692
+root@control-plane:~# kubectl describe node control-plane | more
+Name:               control-plane
+Roles:              control-plane
+Labels:             beta.kubernetes.io/arch=amd64
+                    beta.kubernetes.io/os=linux
+                    kubernetes.io/arch=amd64
+                    kubernetes.io/hostname=control-plane
+                    kubernetes.io/os=linux
+                    node-role.kubernetes.io/control-plane=
+                    node.kubernetes.io/exclude-from-external-load-balancers=
+Annotations:        kubeadm.alpha.kubernetes.io/cri-socket: unix:///var/run/containerd/containerd.sock
+                    node.alpha.kubernetes.io/ttl: 0
+                    volumes.kubernetes.io/controller-managed-attach-detach: true
+CreationTimestamp:  Sun, 07 Jan 2024 18:46:54 +0000
+Taints:             node-role.kubernetes.io/control-plane:NoSchedule
+Unschedulable:      false
+Lease:
+  HolderIdentity:  control-plane
+  AcquireTime:     <unset>
+  RenewTime:       Sun, 07 Jan 2024 18:51:02 +0000
+Conditions:
+  Type             Status  LastHeartbeatTime                 LastTransitionTime                Reason                       Message
+  ----             ------  -----------------                 ------------------                ------                       -------
+  MemoryPressure   False   Sun, 07 Jan 2024 18:49:40 +0000   Sun, 07 Jan 2024 18:46:54 +0000   KubeletHasSufficientMemory   kubelet has sufficient memo
+ry available
+  DiskPressure     False   Sun, 07 Jan 2024 18:49:40 +0000   Sun, 07 Jan 2024 18:46:54 +0000   KubeletHasNoDiskPressure     kubelet has no disk pressur
+e
+  PIDPressure      False   Sun, 07 Jan 2024 18:49:40 +0000   Sun, 07 Jan 2024 18:46:54 +0000   KubeletHasSufficientPID      kubelet has sufficient PID 
+available
+  Ready            True    Sun, 07 Jan 2024 18:49:40 +0000   Sun, 07 Jan 2024 18:49:40 +0000   KubeletReady                 kubelet is posting ready st
+atus
+Addresses:
+  InternalIP:  172.18.0.3
+  Hostname:    control-plane
+Capacity:
+  cpu:                8
+  ephemeral-storage:  263174212Ki
+  hugepages-1Gi:      0
+  hugepages-2Mi:      0
+  memory:             7814188Ki
+  pods:               110
+Allocatable:
+  cpu:                8
+  ephemeral-storage:  256015873233
+  hugepages-1Gi:      0
+  hugepages-2Mi:      0
+  memory:             6801469188
+  pods:               110
+System Info:
+  Machine ID:                 b645248fbc5b4ee3a691fea9bb0cfc65
+  System UUID:                b645248fbc5b4ee3a691fea9bb0cfc65
+  Boot ID:                    626ab094-ad89-4fa3-a57d-0988f9c8d8e5
+  Kernel Version:             5.10.102.1-microsoft-standard-WSL2
+  OS Image:                   Ubuntu 22.04.1 LTS
+  Operating System:           linux
+  Architecture:               amd64
+  Container Runtime Version:  containerd://1.6.12
+  Kubelet Version:            v1.26.0
+  Kube-Proxy Version:         v1.26.0
+PodCIDR:                      10.10.0.0/24
+PodCIDRs:                     10.10.0.0/24
+Non-terminated Pods:          (7 in total)
+  Namespace                   Name                                     CPU Requests  CPU Limits  Memory Requests  Memory Limits  Age
+  ---------                   ----                                     ------------  ----------  ---------------  -------------  ---
+  kube-system                 coredns-787d4945fb-8s57s                 100m (1%)     0 (0%)      70Mi (1%)        170Mi (2%)     3m59s
+  kube-system                 coredns-787d4945fb-dcdwh                 100m (1%)     0 (0%)      70Mi (1%)        170Mi (2%)     3m59s
+  kube-system                 etcd-control-plane                       100m (1%)     0 (0%)      100Mi (1%)       0 (0%)         4m15s
+  kube-system                 kube-apiserver-control-plane             250m (3%)     0 (0%)      0 (0%)           0 (0%)         4m15s
+  kube-system                 kube-controller-manager-control-plane    200m (2%)     0 (0%)      0 (0%)           0 (0%)         4m15s
+  kube-system                 kube-proxy-b4gms                         0 (0%)        0 (0%)      0 (0%)           0 (0%)         4m
+  kube-system                 kube-scheduler-control-plane             100m (1%)     0 (0%)      0 (0%)           0 (0%)         4m15s
+Allocated resources:
+  (Total limits may be over 100 percent, i.e., overcommitted.)
+  Resource           Requests    Limits
+  --------           --------    ------
+  cpu                850m (10%)  0 (0%)
+  memory             240Mi (3%)  340Mi (5%)
+  ephemeral-storage  0 (0%)      0 (0%)
+  hugepages-1Gi      0 (0%)      0 (0%)
+  hugepages-2Mi      0 (0%)      0 (0%)
+Events:
+  Type     Reason                   Age                    From             Message
+  ----     ------                   ----                   ----             -------
+  Normal   Starting                 3m57s                  kube-proxy       
+  Normal   NodeHasSufficientMemory  4m17s (x5 over 4m17s)  kubelet          Node control-plane status is now: NodeHasSufficientMemory
+  Normal   NodeHasNoDiskPressure    4m17s (x5 over 4m17s)  kubelet          Node control-plane status is now: NodeHasNoDiskPressure
+  Normal   NodeHasSufficientPID     4m17s (x4 over 4m17s)  kubelet          Node control-plane status is now: NodeHasSufficientPID
+  Normal   Starting                 4m14s                  kubelet          Starting kubelet.
+  Warning  InvalidDiskCapacity      4m14s                  kubelet          invalid capacity 0 on image filesystem
+  Normal   NodeHasSufficientMemory  4m14s                  kubelet          Node control-plane status is now: NodeHasSufficientMemory
+  Normal   NodeHasNoDiskPressure    4m14s                  kubelet          Node control-plane status is now: NodeHasNoDiskPressure
+  Normal   NodeHasSufficientPID     4m14s                  kubelet          Node control-plane status is now: NodeHasSufficientPID
+  Normal   NodeAllocatableEnforced  4m14s                  kubelet          Updated Node Allocatable limit across pods
+  Normal   RegisteredNode           4m                     node-controller  Node control-plane event: Registered Node control-plane in Controller
+  Normal   NodeReady                91s                    kubelet          Node control-plane status is now: NodeReady
+root@control-plane:~# kubectl taint node control-plane node-role.kubernetes.io/control-plane:NoSchedule-
+node/control-plane untainted
+root@control-plane:~# kubectl describe node control-plane | more
+Name:               control-plane
+Roles:              control-plane
+Labels:             beta.kubernetes.io/arch=amd64
+                    beta.kubernetes.io/os=linux
+                    kubernetes.io/arch=amd64
+                    kubernetes.io/hostname=control-plane
+                    kubernetes.io/os=linux
+                    node-role.kubernetes.io/control-plane=
+                    node.kubernetes.io/exclude-from-external-load-balancers=
+Annotations:        kubeadm.alpha.kubernetes.io/cri-socket: unix:///var/run/containerd/containerd.sock
+                    node.alpha.kubernetes.io/ttl: 0
+                    volumes.kubernetes.io/controller-managed-attach-detach: true
+CreationTimestamp:  Sun, 07 Jan 2024 18:46:54 +0000
+Taints:             <none>
+Unschedulable:      false
+Lease:
+  HolderIdentity:  control-plane
+  AcquireTime:     <unset>
+  RenewTime:       Sun, 07 Jan 2024 18:54:05 +0000
+Conditions:
+  Type             Status  LastHeartbeatTime                 LastTransitionTime                Reason                       Message
+  ----             ------  -----------------                 ------------------                ------                       -------
+  MemoryPressure   False   Sun, 07 Jan 2024 18:49:40 +0000   Sun, 07 Jan 2024 18:46:54 +0000   KubeletHasSufficientMemory   kubelet has sufficient memo
+ry available
+  DiskPressure     False   Sun, 07 Jan 2024 18:49:40 +0000   Sun, 07 Jan 2024 18:46:54 +0000   KubeletHasNoDiskPressure     kubelet has no disk pressur
+e
+  PIDPressure      False   Sun, 07 Jan 2024 18:49:40 +0000   Sun, 07 Jan 2024 18:46:54 +0000   KubeletHasSufficientPID      kubelet has sufficient PID 
+available
+  Ready            True    Sun, 07 Jan 2024 18:49:40 +0000   Sun, 07 Jan 2024 18:49:40 +0000   KubeletReady                 kubelet is posting ready st
+atus
+Addresses:
+  InternalIP:  172.18.0.3
+  Hostname:    control-plane
+Capacity:
+  cpu:                8
+  ephemeral-storage:  263174212Ki
+  hugepages-1Gi:      0
+  hugepages-2Mi:      0
+  memory:             7814188Ki
+  pods:               110
+Allocatable:
+  cpu:                8
+  ephemeral-storage:  256015873233
+  hugepages-1Gi:      0
+  hugepages-2Mi:      0
+  memory:             6801469188
+  pods:               110
+System Info:
+  Machine ID:                 b645248fbc5b4ee3a691fea9bb0cfc65
+  System UUID:                b645248fbc5b4ee3a691fea9bb0cfc65
+  Boot ID:                    626ab094-ad89-4fa3-a57d-0988f9c8d8e5
+  Kernel Version:             5.10.102.1-microsoft-standard-WSL2
+  OS Image:                   Ubuntu 22.04.1 LTS
+  Operating System:           linux
+  Architecture:               amd64
+  Container Runtime Version:  containerd://1.6.12
+  Kubelet Version:            v1.26.0
+  Kube-Proxy Version:         v1.26.0
+PodCIDR:                      10.10.0.0/24
+PodCIDRs:                     10.10.0.0/24
+Non-terminated Pods:          (7 in total)
+  Namespace                   Name                                     CPU Requests  CPU Limits  Memory Requests  Memory Limits  Age
+  ---------                   ----                                     ------------  ----------  ---------------  -------------  ---
+  kube-system                 coredns-787d4945fb-8s57s                 100m (1%)     0 (0%)      70Mi (1%)        170Mi (2%)     6m55s
+  kube-system                 coredns-787d4945fb-dcdwh                 100m (1%)     0 (0%)      70Mi (1%)        170Mi (2%)     6m55s
+  kube-system                 etcd-control-plane                       100m (1%)     0 (0%)      100Mi (1%)       0 (0%)         7m11s
+  kube-system                 kube-apiserver-control-plane             250m (3%)     0 (0%)      0 (0%)           0 (0%)         7m11s
+  kube-system                 kube-controller-manager-control-plane    200m (2%)     0 (0%)      0 (0%)           0 (0%)         7m11s
+  kube-system                 kube-proxy-b4gms                         0 (0%)        0 (0%)      0 (0%)           0 (0%)         6m56s
+  kube-system                 kube-scheduler-control-plane             100m (1%)     0 (0%)      0 (0%)           0 (0%)         7m11s
+Allocated resources:
+  (Total limits may be over 100 percent, i.e., overcommitted.)
+  Resource           Requests    Limits
+  --------           --------    ------
+  cpu                850m (10%)  0 (0%)
+  memory             240Mi (3%)  340Mi (5%)
+  ephemeral-storage  0 (0%)      0 (0%)
+  hugepages-1Gi      0 (0%)      0 (0%)
+  hugepages-2Mi      0 (0%)      0 (0%)
+Events:
+  Type     Reason                   Age                    From             Message
+  ----     ------                   ----                   ----             -------
+  Normal   Starting                 6m53s                  kube-proxy       
+  Normal   NodeHasSufficientMemory  7m13s (x5 over 7m13s)  kubelet          Node control-plane status is now: NodeHasSufficientMemory
+  Normal   NodeHasNoDiskPressure    7m13s (x5 over 7m13s)  kubelet          Node control-plane status is now: NodeHasNoDiskPressure
+  Normal   NodeHasSufficientPID     7m13s (x4 over 7m13s)  kubelet          Node control-plane status is now: NodeHasSufficientPID
+  Normal   Starting                 7m10s                  kubelet          Starting kubelet.
+  Warning  InvalidDiskCapacity      7m10s                  kubelet          invalid capacity 0 on image filesystem
+  Normal   NodeHasSufficientMemory  7m10s                  kubelet          Node control-plane status is now: NodeHasSufficientMemory
+  Normal   NodeHasNoDiskPressure    7m10s                  kubelet          Node control-plane status is now: NodeHasNoDiskPressure
+  Normal   NodeHasSufficientPID     7m10s                  kubelet          Node control-plane status is now: NodeHasSufficientPID
+  Normal   NodeAllocatableEnforced  7m10s                  kubelet          Updated Node Allocatable limit across pods
+  Normal   RegisteredNode           6m56s                  node-controller  Node control-plane event: Registered Node control-plane in Controller
+  Normal   NodeReady                4m27s                  kubelet          Node control-plane status is now: NodeReady
+root@control-plane:~# 
