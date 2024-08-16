@@ -1,0 +1,26 @@
+RCC
+
+0x40023800 - 0x40023BFF  
+
+RCC AHB1 peripheral clock enable register (RCC_AHB1ENR)
+Address offset: 0x30
+Reset value: 0x00000000
+Loc: 0x40023800 + 0x30 = 0x40023830
+
+GPIO
+
+0x40020000 - 0x400203FF GPIO-A
+
+GPIO port mode register
+Address offset: 0x00
+Loc: 0x40020000 + 0x00 = 0x40020000
+Reset values: 0x0C00 0000 for port A
+
+We neeed PA5 => MODER5[1:0] => 10-11 bit, set to 01 General purpose out mode
+
+GPIO port output data register
+Address offset = 0x14
+Reset value = 0
+Loc: 0x40020000 + 0x14 = 0x40020014
+
+We neeed PA5 => ODR5 => 5 bit
