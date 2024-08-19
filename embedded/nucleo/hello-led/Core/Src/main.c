@@ -90,10 +90,6 @@ int main(void)
   uint32_t *gpio_a_data = (uint32_t*) (GPIO_A + GPIO_Port_Data_Offset);
   *gpio_a_data ^= LED_PIN;
 
-  for(int i = 0; i < 1000000; i++){
-
-  } // delay
-
   /* USER CODE END Init */
 
   /* Configure the system clock */
@@ -115,6 +111,9 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
+
+	  for(int i = 0; i < 1000000; i++){} // delay
+	  *gpio_a_data ^= LED_PIN;
 
     /* USER CODE BEGIN 3 */
   }
